@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Development command
+
+### `docker build -t tfmaker:dev .`
+
+Builds and tags the Docker image.
+
+### `docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true tfmaker:dev`
+
+Creates and runs a new container instance from the image created with the previous command.\
+Open your browser to http://localhost:3001/ and you should see the app.
+
 ## Available Scripts
 
 In the project directory, you can run:
