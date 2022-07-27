@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import Modal from "../components/Modal";
+import OverviewFlow from "../components/Example";
 import "bulma/css/bulma.min.css";
 
 const Home = (): JSX.Element => {
@@ -13,15 +14,15 @@ const Home = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <section className="main-content columns is-fullheight">
+      <section className="main-content columns">
         <Modal />
         <Sidebar />
-
         <div className="container column is-10">
           <p>React flow</p>
           <button className="js-modal-trigger" onClick={toggleModal} data-target="modal">
             Open JS example modal
           </button>
+          <OverviewFlow />
         </div>
       </section>
     </React.Fragment>
