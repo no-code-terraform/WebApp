@@ -7,8 +7,7 @@ import "bulma/css/bulma.min.css";
 const Home = (): JSX.Element => {
 
   const toggleModal = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // @ts-ignore
-    const modalToToggle: HTMLElement = document.querySelector(`#${event.currentTarget.getAttribute('data-target-modal')}`);
+    const modalToToggle: HTMLElement = document.querySelector(`#${event.currentTarget.getAttribute('data-target-modal')}`) as HTMLInputElement;
     modalToToggle.classList.toggle('is-active')
   };
 
