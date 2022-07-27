@@ -1,4 +1,4 @@
-const Modal = () => {
+const Modal = (props: { toggleModalFunc: any }) => {
     return (
         <div id="modal" className="modal">
             <div className="modal-background"></div>
@@ -9,7 +9,11 @@ const Modal = () => {
                 </div>
             </div>
 
-            <button className="modal-close is-large" aria-label="close"></button>
+            <button
+              onClick={props.toggleModalFunc}
+              className="modal-close is-large"
+              data-target-modal="modal"
+              aria-label="close"></button>
         </div>
     );
 };
