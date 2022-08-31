@@ -4,7 +4,7 @@ import Modal from "../../components/Modal";
 import OverviewFlow from "../../components/Example";
 import "bulma/css/bulma.min.css";
 
-const Project = (): JSX.Element => {
+const Index = (): JSX.Element => {
 
   const toggleModal = (event: React.MouseEvent<HTMLButtonElement>) => {
     const modalToToggle: HTMLElement = document.querySelector(`#${event.currentTarget.getAttribute('data-target-modal')}`) as HTMLInputElement;
@@ -28,4 +28,4 @@ const Project = (): JSX.Element => {
   );
 };
 
-export default Project;
+export default Index;

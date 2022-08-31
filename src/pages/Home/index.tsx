@@ -1,10 +1,10 @@
 import React from "react";
-import "./index.scss"
+import "./index.scss";
 import "bulma/css/bulma.min.css";
 import ReactLogo from './logo.svg';
 import {Link} from "react-router-dom";
 
-const Home = (): JSX.Element => {
+const Index = (): JSX.Element => {
 
   return (
     <React.Fragment>
@@ -18,4 +18,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home;
+export default Index;
