@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import Modal from "../components/Modal";
-import OverviewFlow from "../components/Example";
+import Sidebar from "../../components/Sidebar";
+import Modal from "../../components/Modal";
+import OverviewFlow from "../../components/Example";
 import "bulma/css/bulma.min.css";
 
 const Project = (): JSX.Element => {
