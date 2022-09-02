@@ -3,8 +3,10 @@ import Sidebar from "../../components/Sidebar";
 import Modal from "../../components/Modal";
 import OverviewFlow from "../../components/Example";
 import "bulma/css/bulma.min.css";
+import {useLocation} from "react-router-dom";
 
 const Index = (): JSX.Element => {
+  const data = useLocation();
 
   const toggleModal = (event: React.MouseEvent<HTMLButtonElement>) => {
     const modalToToggle: HTMLElement = document.querySelector(`#${event.currentTarget.getAttribute('data-target-modal')}`) as HTMLInputElement;

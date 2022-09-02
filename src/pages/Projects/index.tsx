@@ -13,7 +13,7 @@ const Index = (): JSX.Element => {
           <h1 className="page-projects__title title is-1">List of projects</h1>
           <ul className="columns">
             {data.map(project =>
-                <li className="column" key={project.id}>
+                <li className="column is-4" key={project.id}>
                   <PreviewProject data={project}/>
                 </li>
               )

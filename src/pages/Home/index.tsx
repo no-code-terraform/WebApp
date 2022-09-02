@@ -12,7 +12,7 @@ const Index = (): JSX.Element => {
         <img className="page-home__logo" src={ReactLogo} alt="Hetic Logo" />
         <h1 className="page-home__title title is-1">Tfmaker</h1>
         <p className="subtitle">Tfmaker, a GUI in your browser to draw your cloud infrastructure and generate your terraform files.</p>
-        <Link className="page-home__link button is-outlined is-medium" to='/projects'>See the list of projects</Link>
+        <Link to="/projects" className="page-home__link button is-outlined is-medium">See the list of projects</Link>
       </div>
     </React.Fragment>
   );
