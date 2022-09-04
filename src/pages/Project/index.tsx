@@ -21,7 +21,7 @@ const Index = (): JSX.Element => {
         <div className="column is-2">
           <Sidebar />
         </div>
-        <div className="column is-10">
+        <div className="column is-10e">
           <p>React flow</p>
           <button className="js-modal-trigger" onClick={toggleModal} data-target-modal="modal">
             Open JS example modal

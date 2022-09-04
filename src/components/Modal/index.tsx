@@ -1,21 +1,35 @@
+import React from "react";
+// @ts-ignore
+import * as FileSaver from 'file-saver';
+
 const Modal = (props: { toggleModalFunc: any }) => {
-    return (
-        <div id="modal" className="modal">
-            <div className="modal-background"></div>
 
-            <div className="modal-content">
-                <form className="box">
-                  Form
-                </form>
-            </div>
+  const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
+    var blob = new Blob(["Welcome to Websparrow.org."],
+      { type: "text/plain;charset=utf-8" });
+    FileSaver.saveAs(blob, "static.txt");
+  };
 
-            <button
-              onClick={props.toggleModalFunc}
-              className="modal-close is-large"
-              data-target-modal="modal"
-              aria-label="close"></button>
-        </div>
-    );
+  return (
+      <div id="modal" className="modal">
+          <div className="modal-background"></div>
+
+          <div className="modal-content">
+              <form className="box">
+                <button
+                  onClick={generateJsonFile}>
+                  Generate file
+                </button>
+              </form>
+          </div>
+
+          <button
+            onClick={props.toggleModalFunc}
+            className="modal-close is-large"
+            data-target-modal="modal"
+            aria-label="close"></button>
+      </div>
+  );
 };
 
 export default Modal;

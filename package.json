@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "bulma": "^0.9.4",
+    "file-saver": "^2.0.5",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "jest": "^28.1.3"
   }
 }
