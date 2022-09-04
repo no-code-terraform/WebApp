@@ -4,7 +4,7 @@ import DropDown from "../Dropdown";
 
 const Sidebar = () => {
   return (
-    <div className="column is-3 is-narrow-mobile is-fullheight section is-hidden-mobile">
+    <div className="is-narrow-mobile is-hidden-mobile">
       <Tabs />
       <Search />
       <DropDown />

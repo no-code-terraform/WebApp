@@ -4,6 +4,7 @@ import Modal from "../../components/Modal";
 import OverviewFlow from "../../components/Example";
 import "bulma/css/bulma.min.css";
 import {useLocation} from "react-router-dom";
+import "./index.scss";
 
 const Index = (): JSX.Element => {
   const data = useLocation();
@@ -15,10 +16,12 @@ const Index = (): JSX.Element => {
 
   return (
     <React.Fragment>
-      <section className="main-content columns">
+      <section className="page-project columns">
         <Modal toggleModalFunc={toggleModal}/>
-        <Sidebar />
-        <div className="container column is-10">
+        <div className="column is-2">
+          <Sidebar />
+        </div>
+        <div className="column is-10">
           <p>React flow</p>
           <button className="js-modal-trigger" onClick={toggleModal} data-target-modal="modal">
             Open JS example modal
