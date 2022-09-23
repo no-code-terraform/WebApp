@@ -6,7 +6,7 @@ const PreviewProject = (props: { data: any }) => {
 
     <Link
       to={`/project/${props.data.id}`}
-      state={{ infoProject: props.data }}
+      state={{ data: props.data }}
       className="previewProject card p-3">
       <div className="card-content">
         <p className="title is-size-6 mb-1">{ props.data.name }</p>
