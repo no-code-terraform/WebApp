@@ -1,6 +1,12 @@
+import React from "react";
 
 
-const Sidebar = () => {
+const Sidebar = (): JSX.Element => {
+
+  const addNode = () => {
+    console.log('test')
+  };
+
   return (
     <aside className="menu">
       <p className="menu-label ">
@@ -10,7 +16,7 @@ const Sidebar = () => {
         <li>
           <a className="is-active">Common</a>
           <ul>
-            <li><a>item</a></li>
+            <li><a onClick={addNode}>item</a></li>
             <li><a>item</a></li>
             <li><a>item</a></li>
           </ul>
