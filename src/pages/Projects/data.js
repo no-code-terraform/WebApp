@@ -10,7 +10,7 @@ export const data = [
           label: 'Project 1',
         },
         position: { x: 250, y: 0 },
-      }
+      },
     ],
     "edges": []
   },
@@ -25,7 +25,7 @@ export const data = [
           label: 'Project 2',
         },
         position: { x: 250, y: 0 },
-      }
+      },
     ],
     "edges": []
   },

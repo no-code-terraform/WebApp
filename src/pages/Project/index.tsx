@@ -29,7 +29,7 @@ const Index = (): JSX.Element => {
               Export
             </button>
           </div>
-          <OverviewFlow />
+          <OverviewFlow data={ data.infoProject } />
         </div>
       </section>
     </React.Fragment>
