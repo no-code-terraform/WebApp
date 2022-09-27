@@ -2,12 +2,12 @@ import React from "react";
 // @ts-ignore
 import * as FileSaver from 'file-saver';
 
-const Modal = (props: { toggleModalFunc: any }) => {
+const Modal = (props: { toggleModalFunc: any, data: any }) => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const blob = new Blob(["Welcome to Tfmaker"],
+    const blob = new Blob([JSON.stringify(props.data)],
       { type: "text/plain;charset=utf-8" });
-    FileSaver.saveAs(blob, "static.txt");
+    FileSaver.saveAs(blob, "tfmaker.json");
   };
 
   return (

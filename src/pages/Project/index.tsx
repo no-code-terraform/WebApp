@@ -18,7 +18,10 @@ const Index = (): JSX.Element => {
   return (
     <React.Fragment>
       <section className="page-project columns">
-        <Modal toggleModalFunc={toggleModal}/>
+        <Modal
+          toggleModalFunc={toggleModal}
+          data={ data.infoProject }
+        />
         <div className="column is-2">
           <Sidebar />
         </div>
