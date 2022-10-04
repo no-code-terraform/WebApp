@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import ReactFlow, {
+  addEdge,
   MiniMap,
   Controls,
   Background,
+  useNodesState,
+  useEdgesState,
 } from 'react-flow-renderer';
 
 const OverviewFlow = (props) => {
+  const [nodes, setNodes, onNodesChange] = useNodesState(props.data.nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(props.data.edges);
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
   return (
     <ReactFlow
-      nodes={props.data.nodes}
-      edges={props.data.edges}
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
       fitView
       attributionPosition="top-right"
     >
