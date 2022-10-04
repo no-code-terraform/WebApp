@@ -5,12 +5,11 @@ import 'reactflow/dist/style.css';
 import { TextUpdaterNode } from "../TextUpdaterNode";
 
 const OverviewFlow = (props) => {
-const nodeTypes = useMemo(() => ({ textUpdater: TextUpdaterNode }), []);
-
-const OverviewFlow = (props) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(props.data.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(props.data.edges);
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+  const nodeTypes = useMemo(() => ({ textUpdater: TextUpdaterNode }), []);
+
 
   return (
     <ReactFlow
