@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./index.scss";
 
 const PreviewProject = (props: { data: any }) => {
@@ -6,9 +6,10 @@ const PreviewProject = (props: { data: any }) => {
     <Link
       to={`/project/${props.data.id}`}
       state={{ infoProject: props.data }}
-      className="previewProject card p-3">
+      className="previewProject card p-3"
+    >
       <div className="card-content">
-        <p className="title is-size-6 mb-1">{ props.data.name }</p>
+        <p className="title is-size-6 mb-1">{props.data.name}</p>
         <p className="subtitle">Subtitle</p>
         <div className="content mb-1 is-flex is-justify-content-space-between is-align-items-center">
           <p>Created</p>

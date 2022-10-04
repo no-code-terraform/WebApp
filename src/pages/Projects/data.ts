@@ -1,18 +1,18 @@
 export const data = [
   {
-    "id": "1234",
-    "name": "Project 1",
-    "nodes": [
+    id: "1234",
+    name: "Project 1",
+    nodes: [
       {
-        id: '1',
-        type: 'input',
+        id: "1",
+        type: "input",
         data: {
-          label: 'Project 1',
+          label: "Project 1",
         },
         position: { x: 250, y: 0 },
       },
     ],
-    "edges": []
+    edges: [],
   },
   {
     "id": "12345",
@@ -20,7 +20,7 @@ export const data = [
     "nodes": [
       {
         id: '1',
-        type: 'input',
+        type: 'textUpdater',
         data: {
           label: 'Project 2',
         },
@@ -29,4 +29,4 @@ export const data = [
     ],
     "edges": []
   },
-]
+];
