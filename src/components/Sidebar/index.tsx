@@ -1,11 +1,7 @@
 import React from "react";
 
 
-const Sidebar = (): JSX.Element => {
-
-  const addNode = () => {
-    console.log('test')
-  };
+const Sidebar = (props: { addNodeFunc: any }): JSX.Element => {
 
   return (
     <aside className="menu">
@@ -16,7 +12,7 @@ const Sidebar = (): JSX.Element => {
         <li>
           <a className="is-active">Common</a>
           <ul>
-            <li><a onClick={addNode}>item</a></li>
+            <li><a onClick={() => props.addNodeFunc('item')}>item</a></li>
             <li><a>item</a></li>
             <li><a>item</a></li>
           </ul>
