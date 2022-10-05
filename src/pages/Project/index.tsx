@@ -5,7 +5,7 @@ import Modal from "../../components/Modal";
 import OverviewFlow from "../../components/OverviewFlow";
 import "bulma/css/bulma.min.css";
 import "./index.scss";
-import { useNodesState } from "react-flow-renderer";
+import { useNodesState } from "reactflow";
 
 const Index = (): JSX.Element => {
   const location = useLocation();
@@ -32,18 +32,21 @@ const Index = (): JSX.Element => {
     modalToToggle.classList.toggle("is-active");
   };
 
-  const onAdd = useCallback((labelNode: any) => {
-    yPos.current += 50;
-    const newNode = {
-      id: getNodeId(),
-      data: { label: labelNode },
-      position: {
-        x: 250,
-        y: yPos.current
-      },
-    };
-    setNodes((nds) => nds.concat(newNode));
-  }, [setNodes]);
+  const onAdd = useCallback(
+    (labelNode: any) => {
+      yPos.current += 50;
+      const newNode = {
+        id: getNodeId(),
+        data: { label: labelNode },
+        position: {
+          x: 250,
+          y: yPos.current,
+        },
+      };
+      setNodes((nds) => nds.concat(newNode));
+    },
+    [setNodes]
+  );
 
   return (
     <React.Fragment>

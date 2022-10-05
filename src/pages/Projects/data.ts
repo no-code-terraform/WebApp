@@ -15,18 +15,18 @@ export const data = [
     edges: [],
   },
   {
-    "id": "12345",
-    "name": "Project 2",
-    "nodes": [
+    id: "12345",
+    name: "Project 2",
+    nodes: [
       {
-        id: '1',
-        type: 'textUpdater',
+        id: "1",
+        type: "textUpdater",
         data: {
-          label: 'Project 2',
+          label: "Project 2",
         },
         position: { x: 250, y: 0 },
       },
     ],
-    "edges": []
+    edges: [],
   },
 ];
