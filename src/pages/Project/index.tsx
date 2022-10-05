@@ -53,8 +53,8 @@ const Index = (): JSX.Element => {
       <section className="page-project columns">
         <Modal toggleModalFunc={toggleModal} data={data.infoProject} />
         <div className="column is-2">
-          <Sidebar addNodeFunc={onAdd} />
-          {/* <Sidebar services={services} addNodeFunc={onAdd}/> */}
+          {/* <Sidebar addNodeFunc={onAdd} /> */}
+          <Sidebar services={services} addNodeFunc={onAdd}/>
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
