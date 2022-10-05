@@ -1,7 +1,6 @@
 import React from "react";
 
 const Sidebar = (props: { addNodeFunc: any }): JSX.Element => {
-
   return (
     <aside className="menu">
       <p className="menu-label ">AWS Components</p>
@@ -9,9 +8,15 @@ const Sidebar = (props: { addNodeFunc: any }): JSX.Element => {
         <li>
           <a className="is-active">Common</a>
           <ul>
-            <li><a onClick={() => props.addNodeFunc('item')}>item</a></li>
-            <li><a>item</a></li>
-            <li><a>item</a></li>
+            <li>
+              <a onClick={() => props.addNodeFunc("item")}>item</a>
+            </li>
+            <li>
+              <a>item</a>
+            </li>
+            <li>
+              <a>item</a>
+            </li>
           </ul>
         </li>
 
