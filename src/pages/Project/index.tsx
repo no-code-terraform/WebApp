@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import Modal from "../../components/Modal";
@@ -15,13 +15,12 @@ const Index = (): JSX.Element => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/services/')
-      .then(data => data.json())
-      .then(response => {
-        console.log(response)
-      })
-
-  }, [])
+    fetch("http://127.0.0.1:8000/api/services/")
+      .then((data) => data.json())
+      .then((response) => {
+        console.log(response);
+      });
+  }, []);
 
   const getNodeId = () => `id_${+new Date()}`;
 
@@ -54,7 +53,7 @@ const Index = (): JSX.Element => {
         <Modal toggleModalFunc={toggleModal} data={data.infoProject} />
         <div className="column is-2">
           {/* <Sidebar addNodeFunc={onAdd} /> */}
-          <Sidebar services={services} addNodeFunc={onAdd}/>
+          <Sidebar services={services} addNodeFunc={onAdd} />
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
