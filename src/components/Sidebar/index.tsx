@@ -1,6 +1,7 @@
 import React from "react";
 
 const Sidebar = (props: { addNodeFunc: any }): JSX.Element => {
+// const Sidebar = (props: { addNodeFunc: any, services: any }): JSX.Element => {
   return (
     <aside className="menu">
       <p className="menu-label ">AWS Components</p>
