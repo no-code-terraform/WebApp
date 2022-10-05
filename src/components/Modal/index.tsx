@@ -1,14 +1,9 @@
 import React from "react";
-// @ts-ignore
-import * as FileSaver from "file-saver";
 
 const Modal = (props: { toggleModalFunc: any; data: any }) => {
-  const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const validateConfig = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const blob = new Blob([JSON.stringify(props.data)], {
-      type: "text/plain;charset=utf-8",
-    });
-    FileSaver.saveAs(blob, "tfmaker.json");
+    alert('Functionality in progress');
   };
 
   return (
@@ -17,7 +12,7 @@ const Modal = (props: { toggleModalFunc: any; data: any }) => {
 
       <div className="modal-content">
         <form className="box">
-          <button onClick={generateJsonFile}>Generate file</button>
+          <button onClick={validateConfig}>Generate file</button>
         </form>
       </div>
 
