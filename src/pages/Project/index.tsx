@@ -12,16 +12,16 @@ const Index = (): JSX.Element => {
   const data: any = location.state;
   const yPos = useRef(0);
   const [nodes, setNodes] = useNodesState(data.infoProject.nodes);
-  const [services, setServices] = useState([]);
+  const [servicesApi, setServicesApi] = useState([]);
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/services/')
       .then(data => data.json())
       .then(response => {
-        console.log(response)
+        setServicesApi(response.data.services)
       })
-
   }, [])
+
 
   const getNodeId = () => `id_${+new Date()}`;
 
@@ -50,7 +50,7 @@ const Index = (): JSX.Element => {
       <section className="page-project columns">
         <Modal toggleModalFunc={toggleModal} data={data.infoProject} />
         <div className="column is-2">
-          <Sidebar services={services} addNodeFunc={onAdd}/>
+          <Sidebar data={servicesApi} addNodeFunc={onAdd}/>
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
