@@ -11,7 +11,7 @@ const Sidebar = (props: { addNodeFunc: any, updateJsonFunc: any, jsonCurr: any, 
             key={item.name}
             onClick={() => {
               props.updateJsonFunc(item.provider, item.tf_key, item.extra);
-              props.addNodeFunc(item.name, item.extra)
+              props.addNodeFunc(item.name, item.provider, item.tf_key, item.extra)
             }}>
             {item.name}</li>
         ))}

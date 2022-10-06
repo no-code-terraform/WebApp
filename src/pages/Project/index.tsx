@@ -41,13 +41,17 @@ const Index = (): JSX.Element => {
     console.log(json.providers)
   };
 
-  const updateServiceInJson = (providerName: string, serviceName: any, extras: any) => {
+  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any) => {
     let configService: {} = {};
 
-    extras.forEach((config: any) => {
-      // @ts-ignore
-      configService[config.name] = '';
-    })
+    if (serviceWithConfig) {
+      configService = serviceWithConfig
+    } else {
+      extras.forEach((config: any) => {
+        // @ts-ignore
+        configService[config.name] = '';
+      })
+    }
 
     setJson({...json,
       providers: {
@@ -70,7 +74,7 @@ const Index = (): JSX.Element => {
   const getNodeId = () => `id_${+new Date()}`;
 
   const onAdd = useCallback(
-    (labelNode: any, extras: any) => {
+    (labelNode: any, providerNode: any, tfkeyNode: any, extras: any) => {
       yPos.current += 50;
       const newNode = {
         id: getNodeId(),
@@ -78,6 +82,9 @@ const Index = (): JSX.Element => {
         data: {
           label: labelNode,
           extras: extras,
+          provider: providerNode,
+          tf_key: tfkeyNode,
+          updateServiceInJsonFunc: updateServiceInJson,
         },
         position: {
           x: 250,
