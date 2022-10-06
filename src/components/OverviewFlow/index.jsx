@@ -1,22 +1,12 @@
 import React, { useMemo } from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
-import { TextUpdaterNode } from "../TextUpdaterNode";
-import Modal from "../Modal";
 import "reactflow/dist/style.css";
 import "./index.css";
 
 import { ServiceNode } from "../ServiceNode";
 
 const OverviewFlow = (props) => {
-  // const [isOpen, setIsOpen] = useState(false)
   const nodeTypes = useMemo(() => ({ textUpdater: ServiceNode }), []);
-
-  const toggleModal = (event) => {
-    const modalToToggle = document.querySelector(
-      `#${event.currentTarget.getAttribute("data-target-modal")}`
-    );
-    modalToToggle.classList.toggle("is-active");
-  };
 
   return (
     <>
@@ -26,14 +16,6 @@ const OverviewFlow = (props) => {
       nodeTypes={nodeTypes}
       attributionPosition="top-right"
     >
-      <Modal toggleModalFunc={toggleModal}  />
-      <button
-        className="page-project__btnExport button is-link js-modal-trigger"
-        onClick={toggleModal}
-        data-target-modal="modal"
-      >
-        Export
-      </button>
       <MiniMap
         nodeStrokeColor={(n) => {
           if (n.style?.background) return n.style.background;
