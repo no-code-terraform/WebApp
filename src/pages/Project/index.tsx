@@ -38,6 +38,7 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    console.log(servicesApi)
     console.log(json.providers)
   };
 
