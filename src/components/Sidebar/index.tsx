@@ -7,7 +7,7 @@ const Sidebar = (props: { addNodeFunc: any, data: any }): JSX.Element => {
       <p className="menu-label">List services</p>
       <ul className="menu-list">
         {props.data && props.data.map((item: any) => (
-          <li key={item.name} onClick={() => props.addNodeFunc(item.name)}>{item.name}</li>
+          <li key={item.name} onClick={() => props.addNodeFunc(item.name, item.extra)}>{item.name}</li>
         ))}
       </ul>
     </aside>

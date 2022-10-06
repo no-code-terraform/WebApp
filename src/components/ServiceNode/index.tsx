@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Handle, Position } from "reactflow";
-// import "reactflow/dist/style.css";
 import "bulma/css/bulma.min.css";
 
 export const ServiceNode = ({ data }: any) => {
   const [isOpen, setIsOpen] = useState(true);
+
+  console.log(data)
 
   return (
     <>

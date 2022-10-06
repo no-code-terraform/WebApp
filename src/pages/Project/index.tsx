@@ -31,11 +31,15 @@ const Index = (): JSX.Element => {
   const getNodeId = () => `id_${+new Date()}`;
 
   const onAdd = useCallback(
-    (labelNode: any) => {
+    (labelNode: any, extras: any) => {
       yPos.current += 50;
       const newNode = {
         id: getNodeId(),
-        data: { label: labelNode },
+        type: "textUpdater",
+        data: {
+          label: labelNode,
+          extras: extras,
+        },
         position: {
           x: 250,
           y: yPos.current,

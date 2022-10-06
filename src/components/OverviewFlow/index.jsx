@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
 import "reactflow/dist/style.css";
 import "./index.css";
@@ -6,12 +6,17 @@ import "./index.css";
 import { ServiceNode } from "../ServiceNode";
 
 const OverviewFlow = (props) => {
+  const [nodes, changeNodes] = useState(props.nodes);
   const nodeTypes = useMemo(() => ({ textUpdater: ServiceNode }), []);
+
+  useEffect(() => {
+    changeNodes(props.nodes);
+  }, [props.nodes]);
 
   return (
     <>
     <ReactFlow
-      nodes={props.nodes}
+      nodes={nodes}
       fitView
       nodeTypes={nodeTypes}
       attributionPosition="top-right"
