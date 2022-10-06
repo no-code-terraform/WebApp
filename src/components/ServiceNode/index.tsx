@@ -5,8 +5,6 @@ import "bulma/css/bulma.min.css";
 export const ServiceNode = ({ data }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(data)
-
   return (
     <>
       <Handle type="target" position={Position.Top} />

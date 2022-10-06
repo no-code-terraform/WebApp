@@ -13,7 +13,7 @@ const Index = (): JSX.Element => {
   const [nodes, setNodes] = useNodesState(data.infoProject.nodes);
   const [servicesApi, setServicesApi] = useState([]);
   const [json, setJson] = useState({
-    "stages": [],
+    "stages": ["production", "staging"],
     "providers": {
       "aws": {
         "region": "us-east-2",
@@ -21,28 +21,52 @@ const Index = (): JSX.Element => {
       },
       "gcp": {
         "region": "europe-west9-a",
-        "project": "",
+        "project": "notional-yeti-343410",
         "services": {}
       }
     }
   });
-
-  console.log('json: ' + json)
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/services/')
       .then(data => data.json())
       .then(response => {
         setServicesApi(response.data.services)
-        console.log(response.data.services);
       })
   }, [])
 
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    alert('Functionality in progress')
+    console.log(json)
   };
+
+  const updateJsonWithNewService = (providerName: string, serviceName: any) => {
+    let arrayToUpdated = json.providers[providerName as keyof typeof json.providers].services = {};
+    
+    // @ts-ignore
+    arrayToUpdated[serviceName] = [
+      {
+        "ami": "ami-085925f297f89fce1",
+        "instance_type": "t2.micro",
+        "ports": [8080],
+        "count": 1
+      }
+    ]
+
+    setJson({...json,
+      providers: {
+        ...json.providers,
+        [providerName]: {
+          // @ts-ignore
+          ...json.providers[providerName],
+          [serviceName]: [
+            arrayToUpdated
+          ]
+        }
+      }
+    })
+  }
 
   const getNodeId = () => `id_${+new Date()}`;
 
@@ -70,7 +94,7 @@ const Index = (): JSX.Element => {
     <React.Fragment>
       <section className="page-project columns">
         <div className="column is-2">
-          <Sidebar data={servicesApi} addNodeFunc={onAdd}/>
+          <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json} updateJsonFunc={updateJsonWithNewService}/>
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
