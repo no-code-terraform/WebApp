@@ -12,6 +12,22 @@ const Index = (): JSX.Element => {
   const yPos = useRef(0);
   const [nodes, setNodes] = useNodesState(data.infoProject.nodes);
   const [servicesApi, setServicesApi] = useState([]);
+  const [json, setJson] = useState({
+    "stages": [],
+    "providers": {
+      "aws": {
+        "region": "us-east-2",
+        "services": {}
+      },
+      "gcp": {
+        "region": "europe-west9-a",
+        "project": "",
+        "services": {}
+      }
+    }
+  });
+
+  console.log('json: ' + json)
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/services/')
