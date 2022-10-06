@@ -38,21 +38,16 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(json)
+    console.log(json.providers)
   };
 
-  const updateJsonWithNewService = (providerName: string, serviceName: any) => {
-    let arrayToUpdated = json.providers[providerName as keyof typeof json.providers].services = {};
-    
-    // @ts-ignore
-    arrayToUpdated[serviceName] = [
-      {
-        "ami": "ami-085925f297f89fce1",
-        "instance_type": "t2.micro",
-        "ports": [8080],
-        "count": 1
-      }
-    ]
+  const updateServiceInJson = (providerName: string, serviceName: any, extras: any) => {
+    let configService: {} = {};
+
+    extras.forEach((config: any) => {
+      // @ts-ignore
+      configService[config.name] = '';
+    })
 
     setJson({...json,
       providers: {
@@ -60,13 +55,17 @@ const Index = (): JSX.Element => {
         [providerName]: {
           // @ts-ignore
           ...json.providers[providerName],
-          [serviceName]: [
-            arrayToUpdated
-          ]
+          services: {
+            // @ts-ignore
+            ...json.providers[providerName].services,
+            [serviceName]: [
+              configService
+            ],
+          }
         }
       }
     })
-  }
+  };
 
   const getNodeId = () => `id_${+new Date()}`;
 
@@ -94,7 +93,7 @@ const Index = (): JSX.Element => {
     <React.Fragment>
       <section className="page-project columns">
         <div className="column is-2">
-          <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json} updateJsonFunc={updateJsonWithNewService}/>
+          <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json} updateJsonFunc={updateServiceInJson}/>
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
