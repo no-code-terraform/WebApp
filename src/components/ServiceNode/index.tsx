@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 // import "reactflow/dist/style.css";
 import "bulma/css/bulma.min.css";
 
-export const ServiceNode = ({ data }: any) => {
+export const ServiceNode = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (

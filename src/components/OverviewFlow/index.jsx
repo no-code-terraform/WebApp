@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
-import { TextUpdaterNode } from "../TextUpdaterNode";
 import Modal from "../Modal";
 import "reactflow/dist/style.css";
 import "./index.css";
