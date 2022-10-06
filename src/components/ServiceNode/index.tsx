@@ -24,7 +24,7 @@ export const ServiceNode = ({ data }: any) => {
       }
     })
 
-    data.updateServiceInJsonFunc(data.provider, data.tf_key, data.extras, serviceWithConfig)
+    data.updateServiceInJsonFunc(data.provider, data.tf_key, data.extras, serviceWithConfig, data.id)
   }
 
   return (

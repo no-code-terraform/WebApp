@@ -4,7 +4,8 @@ import Sidebar from "../../components/Sidebar";
 import OverviewFlow from "../../components/OverviewFlow";
 import "bulma/css/bulma.min.css";
 import "./index.scss";
-import { useNodesState } from "reactflow";
+import {applyNodeChanges, useNodesState} from "reactflow";
+import {saveAs} from "file-saver";
 
 const Index = (): JSX.Element => {
   const location = useLocation();
@@ -38,21 +39,48 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(servicesApi)
-    console.log(json.providers)
+    fetch('http://127.0.0.1:8000/api/tf/', {
+      method: 'POST',
+      body: JSON.stringify(json),
+    })
+      .then(res => res.blob())
+      .then(blob => saveAs(blob, 'tfmaker.zip')) // saveAs is a function from the file-saver package.
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
-  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any) => {
+  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any, serviceId: any) => {
     let configService: {} = {};
 
     if (serviceWithConfig) {
       configService = serviceWithConfig
     } else {
+
       extras.forEach((config: any) => {
-        // @ts-ignore
-        configService[config.name] = '';
+        if (config.name.split('.')[1]) {
+
+          // @ts-ignore
+          configService[config.name.split('.')[0]] = {};
+
+        } else {
+
+          // @ts-ignore
+          configService[config.name] = '';
+
+        }
       })
+
+      extras.forEach((config: any) => {
+        if (config.name.split('.')[1]) {
+          // @ts-ignore
+          configService[config.name.split('.')[0]][config.name.split('.')[1]] = '';
+        }
+      })
+
     }
+
+    serviceName = serviceName + serviceId
 
     setJson({...json,
       providers: {
@@ -86,6 +114,7 @@ const Index = (): JSX.Element => {
           provider: providerNode,
           tf_key: tfkeyNode,
           updateServiceInJsonFunc: updateServiceInJson,
+          id: getNodeId(),
         },
         position: {
           x: 250,
@@ -94,6 +123,11 @@ const Index = (): JSX.Element => {
       };
       setNodes((nds) => nds.concat(newNode));
     },
+    [setNodes]
+  );
+
+  const onNodesChange = useCallback(
+    (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes]
   );
 
@@ -113,7 +147,7 @@ const Index = (): JSX.Element => {
               Export
             </button>
           </div>
-          <OverviewFlow nodes={nodes} />
+          <OverviewFlow nodes={nodes} onNodesChange={onNodesChange}/>
         </div>
       </section>
     </React.Fragment>

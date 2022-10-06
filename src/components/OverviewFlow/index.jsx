@@ -17,6 +17,7 @@ const OverviewFlow = (props) => {
     <>
     <ReactFlow
       nodes={nodes}
+      onNodesChange={props.onNodesChange}
       fitView
       nodeTypes={nodeTypes}
       attributionPosition="top-right"
