@@ -6,6 +6,7 @@ import "bulma/css/bulma.min.css";
 import "./index.scss";
 import {applyNodeChanges, useNodesState} from "reactflow";
 import {saveAs} from "file-saver";
+import { config } from "process";
 
 const Index = (): JSX.Element => {
   const location = useLocation();
@@ -46,7 +47,7 @@ const Index = (): JSX.Element => {
     //   body: JSON.stringify(json),
     // })
     //   .then(res => res.blob())
-    //   .then(blob => saveAs(blob, 'tfmaker.zip')) // saveAs is a function from the file-saver package.
+    //   .then(blob => saveAs(blob, 'tfmaker.zip'))
     //   .catch((err) => {
     //     console.log(err.message);
     //   });
@@ -82,22 +83,28 @@ const Index = (): JSX.Element => {
 
     }
 
-    setJson({...json,
-      providers: {
-        ...json.providers,
-        [providerName]: {
-          // @ts-ignore
-          ...json.providers[providerName],
-          services: {
+    // @ts-ignore
+    if (serviceName in json.providers[providerName].services) {
+      // @ts-ignore
+      json.providers[providerName].services[serviceName].push(configService)
+    } else {
+      setJson({...json,
+        providers: {
+          ...json.providers,
+          [providerName]: {
             // @ts-ignore
-            ...json.providers[providerName].services,
-            [serviceName]: [
-              configService
-            ],
+            ...json.providers[providerName],
+            services: {
+              // @ts-ignore
+              ...json.providers[providerName].services,
+              [serviceName]: [
+                configService
+              ],
+            }
           }
         }
-      }
-    })
+      })
+    }
   };
 
   const getNodeId = () => `id_${+new Date()}`;

@@ -83,7 +83,7 @@ export const ServiceNode = ({ data }: any) => {
                       className="config"
                       data-config-name={item.name}
                     >
-                      {item.choices.map((option: any) => (
+                      {item.choices && item.choices.map((option: any) => (
                         <option key={option} value={option}>{option}</option>
                       ))}
                     </select>
@@ -109,7 +109,7 @@ export const ServiceNode = ({ data }: any) => {
                       data-config-name={item.name}
                       multiple
                     >
-                      {item.choices.map((option: any) => (
+                      {item.choices && item.choices.map((option: any) => (
                         <option key={option} value={option}>{option}</option>
                       ))}
                     </select>
