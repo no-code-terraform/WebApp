@@ -124,8 +124,6 @@ export const ServiceNode = ({ data }: any) => {
                         className="config"
                         data-config-name={item.name}
                         multiple
-                        defaultValue={item.default != null ? item.default : ''}
-                        onChange={(e) => handleChange(e, item.name)}
                       >
                         {item.choices && item.choices.map((option: any) => (
                           <option key={option} value={option}>{option}</option>
