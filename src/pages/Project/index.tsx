@@ -40,7 +40,6 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(servicesApi)
     console.log(json.providers)
     // fetch('http://127.0.0.1:8000/api/tf/', {
     //   method: 'POST',
@@ -69,7 +68,7 @@ const Index = (): JSX.Element => {
         } else {
 
           // @ts-ignore
-          configService[config.name] = '';
+          configService[config.name] = (config.default as any ? config.default : '');
 
         }
       })
@@ -77,7 +76,7 @@ const Index = (): JSX.Element => {
       extras.forEach((config: any) => {
         if (config.name.split('.')[1]) {
           // @ts-ignore
-          configService[config.name.split('.')[0]][config.name.split('.')[1]] = '';
+          configService[config.name.split('.')[0]][config.name.split('.')[1]] = (config.default as any ? config.default : '');
         }
       })
 
