@@ -8,23 +8,40 @@ export const ServiceNode = ({ data }: any) => {
 
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-
     let serviceWithConfig: {} = {};
     setIsOpen(true)
+
     // @ts-ignore
     const config = ref.current.querySelectorAll('.config');
 
     config.forEach((item: any) => {
-      if (item.dataset.configType) {
-        // @ts-ignore
-        serviceWithConfig[item.dataset.configName] = item.value.split(',');
-      } else {
-        // @ts-ignore
-        serviceWithConfig[item.dataset.configName] = item.value;
+      // @ts-ignore
+      if (item.dataset.configType) serviceWithConfig[item.dataset.configName] = item.value.split(',');
+
+      else {
+
+        if (item.dataset.configName.split('.')[1]) {
+
+          // @ts-ignore
+          serviceWithConfig[item.dataset.configName.split('.')[0]] = {};
+
+        } else {
+
+          // @ts-ignore
+          serviceWithConfig[item.dataset.configName] = item.value;
+
+        }
       }
     })
 
-    data.updateServiceInJsonFunc(data.provider, data.tf_key, data.extras, serviceWithConfig, data.id)
+    config.forEach((item: any) => {
+      if (item.dataset.configName.split('.')[1]) {
+        // @ts-ignore
+        serviceWithConfig[item.dataset.configName.split('.')[0]][item.dataset.configName.split('.')[1]] = '';
+      }
+    })
+
+    data.updateServiceInJsonFunc(data.provider, data.tf_key, data.extras, serviceWithConfig)
   }
 
   return (
@@ -56,7 +73,6 @@ export const ServiceNode = ({ data }: any) => {
                       className="input config"
                       data-config-name={item.name}
                       type="text"
-                      placeholder="ami-085925f297f89fce1"
                     />
                   </fieldset>
                 )
@@ -81,7 +97,6 @@ export const ServiceNode = ({ data }: any) => {
                       data-config-name={item.name}
                       data-config-type={item.type}
                       type="text"
-                      placeholder="ami-085925f297f89fce1"
                     />
                     <p>please separate with commas</p>
                   </fieldset>
@@ -107,7 +122,8 @@ export const ServiceNode = ({ data }: any) => {
                       className="input config"
                       data-config-name={item.name}
                       type="number"
-                      placeholder="ami-085925f297f89fce1"
+                      min={item?.min}
+                      max={item?.max}
                     />
                   </fieldset>
                 )
@@ -118,8 +134,8 @@ export const ServiceNode = ({ data }: any) => {
                       className="config"
                       data-config-name={item.name}
                     >
-                      <option value='yes'>yes</option>
-                      <option value='no'>no</option>
+                      <option value='true'>yes</option>
+                      <option value='false'>no</option>
                     </select>
                   </fieldset>
                 )
@@ -127,7 +143,7 @@ export const ServiceNode = ({ data }: any) => {
               }
             })
           })()}
-          <button onClick={(e) => editConfigs(e)}>Edit</button>
+          <button onClick={(e) => editConfigs(e)}>Validate the configuration</button>
         </div>
       )}
     </>

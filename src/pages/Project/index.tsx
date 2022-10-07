@@ -39,18 +39,20 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    fetch('http://127.0.0.1:8000/api/tf/', {
-      method: 'POST',
-      body: JSON.stringify(json),
-    })
-      .then(res => res.blob())
-      .then(blob => saveAs(blob, 'tfmaker.zip')) // saveAs is a function from the file-saver package.
-      .catch((err) => {
-        console.log(err.message);
-      });
+    console.log(servicesApi)
+    console.log(json.providers)
+    // fetch('http://127.0.0.1:8000/api/tf/', {
+    //   method: 'POST',
+    //   body: JSON.stringify(json),
+    // })
+    //   .then(res => res.blob())
+    //   .then(blob => saveAs(blob, 'tfmaker.zip')) // saveAs is a function from the file-saver package.
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   };
 
-  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any, serviceId: any) => {
+  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any) => {
     let configService: {} = {};
 
     if (serviceWithConfig) {
@@ -79,8 +81,6 @@ const Index = (): JSX.Element => {
       })
 
     }
-
-    serviceName = serviceName + serviceId
 
     setJson({...json,
       providers: {
@@ -114,7 +114,6 @@ const Index = (): JSX.Element => {
           provider: providerNode,
           tf_key: tfkeyNode,
           updateServiceInJsonFunc: updateServiceInJson,
-          id: getNodeId(),
         },
         position: {
           x: 250,
