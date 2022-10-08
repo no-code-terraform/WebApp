@@ -5,11 +5,13 @@ import "bulma/css/bulma.min.css";
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [hasBeenUpdated, setHasBeenUpdated] = useState(false);
 
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     let serviceWithConfig: {} = {};
     setIsOpen(true)
+    setHasBeenUpdated(true)
 
     // @ts-ignore
     const config = ref.current.querySelectorAll('.config');
@@ -41,11 +43,12 @@ export const ServiceNode = ({ data }: any) => {
       }
     })
 
-    data.updateServiceInJsonFunc(data.provider, data.tf_key, data.extras, serviceWithConfig)
+    const configServiceWithId = { ...serviceWithConfig, id: data.id };
+
+    data.updateConfigInJson(data.provider, data.tf_key, data.extras, configServiceWithId, data.id)
   }
 
   const handleChange = (e: any, name: any) => {
-    console.log(name)
     // @ts-ignore
     const configText = ref.current.querySelector(`[data-config-text=${name.replace('.', "")}]`);
     // @ts-ignore
@@ -65,11 +68,16 @@ export const ServiceNode = ({ data }: any) => {
               <p key={item.name}>{item.name} :
                 <span data-config-text={item.name.replace('.', "")}>{item?.default}</span></p>
             ))}
-            <button
-              onClick={() => setIsOpen(false)}
-            >
-              Edit
-            </button>
+
+            {!hasBeenUpdated ?
+              <button
+                onClick={() => setIsOpen(false)}
+              >
+                Edit
+              </button>
+              :
+              <></>
+            }
           </div>
           <div className="text-updater-node" style={{display: isOpen ? 'none':''}}>
             <h1>Edit Service</h1>

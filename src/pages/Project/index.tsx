@@ -40,7 +40,7 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(json.providers)
+    console.log(json)
     // fetch('http://127.0.0.1:8000/api/tf/', {
     //   method: 'POST',
     //   body: JSON.stringify(json),
@@ -52,40 +52,73 @@ const Index = (): JSX.Element => {
     //   });
   };
 
-  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any) => {
+  const updateConfigInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any, serviceId: any) => {
+    // @ts-ignore
+    setJson((prevState) => ({
+      ...prevState,
+      providers: {
+        ...prevState.providers,
+        [providerName]: {
+          // @ts-ignore
+          ...prevState.providers[providerName],
+          services: {
+            // @ts-ignore
+            ...prevState.providers[providerName].services,
+            // @ts-ignore
+            [serviceName]: changeConfigObject(prevState.providers[providerName].services[serviceName], serviceWithConfig, serviceId),
+
+          }
+        }
+      }
+    }))
+  }
+
+  const changeConfigObject = (arr: any, newObject: any, id: any) => {
+    let configObject: any[];
+
+    arr = arr.filter( (obj: { id: any; }) => {
+      return obj.id !== id;
+    });
+
+    configObject = arr;
+
+    delete newObject.id
+
+    configObject.push(newObject)
+
+    return configObject;
+  }
+
+  const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceId: any) => {
     let configService: {} = {};
 
-    if (serviceWithConfig) {
-      configService = serviceWithConfig
-    } else {
+    extras.forEach((config: any) => {
+      if (config.name.split('.')[1]) {
 
-      extras.forEach((config: any) => {
-        if (config.name.split('.')[1]) {
+        // @ts-ignore
+        configService[config.name.split('.')[0]] = {};
 
-          // @ts-ignore
-          configService[config.name.split('.')[0]] = {};
+      } else {
 
-        } else {
+        // @ts-ignore
+        configService[config.name] = (config.default as any ? config.default : '');
 
-          // @ts-ignore
-          configService[config.name] = (config.default as any ? config.default : '');
+      }
+    })
 
-        }
-      })
+    extras.forEach((config: any) => {
+      if (config.name.split('.')[1]) {
+        // @ts-ignore
+        configService[config.name.split('.')[0]][config.name.split('.')[1]] = (config.default as any ? config.default : '');
+      }
+    })
 
-      extras.forEach((config: any) => {
-        if (config.name.split('.')[1]) {
-          // @ts-ignore
-          configService[config.name.split('.')[0]][config.name.split('.')[1]] = (config.default as any ? config.default : '');
-        }
-      })
-
-    }
+    const configServiceWithId = { ...configService, id: serviceId };
 
     // @ts-ignore
     if (serviceName in json.providers[providerName].services) {
       // @ts-ignore
-      json.providers[providerName].services[serviceName].push(configService)
+      json.providers[providerName].services[serviceName].push(configServiceWithId)
     } else {
       setJson({...json,
         providers: {
@@ -97,7 +130,7 @@ const Index = (): JSX.Element => {
               // @ts-ignore
               ...json.providers[providerName].services,
               [serviceName]: [
-                configService
+                configServiceWithId
               ],
             }
           }
@@ -106,10 +139,15 @@ const Index = (): JSX.Element => {
     }
   };
 
-  const getNodeId = () => `id_${+new Date()}`;
+  const getNodeId = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  };
 
   const onAdd = useCallback(
-    (labelNode: any, providerNode: any, tfkeyNode: any, extras: any) => {
+    (labelNode: any, providerNode: any, tfkeyNode: any, extras: any, serviceId: any) => {
+      updateServiceInJson(providerNode, tfkeyNode, extras, serviceId)
       yPos.current += 50;
       const newNode = {
         id: getNodeId(),
@@ -119,7 +157,8 @@ const Index = (): JSX.Element => {
           extras: extras,
           provider: providerNode,
           tf_key: tfkeyNode,
-          updateServiceInJsonFunc: updateServiceInJson,
+          updateConfigInJson: updateConfigInJson,
+          id: serviceId,
         },
         position: {
           x: 250,
@@ -140,7 +179,7 @@ const Index = (): JSX.Element => {
     <React.Fragment>
       <section className="page-project columns">
         <div className="column is-2">
-          <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json} updateJsonFunc={updateServiceInJson}/>
+          <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json}/>
         </div>
         <div className="column is-10e">
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">

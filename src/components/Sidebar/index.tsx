@@ -1,8 +1,8 @@
 import React from "react";
 
-const Sidebar = (props: { addNodeFunc: any, updateJsonFunc: any, jsonCurr: any, data: any }): JSX.Element => {
+const Sidebar = (props: { addNodeFunc: any, jsonCurr: any, data: any }): JSX.Element => {
 
-  const getNodeId = () => `_${+new Date()}`;
+  const getNodeId = () => `id_${+new Date()}`;
 
   return (
     <aside className="menu">
@@ -12,8 +12,7 @@ const Sidebar = (props: { addNodeFunc: any, updateJsonFunc: any, jsonCurr: any, 
           <li
             key={item.name}
             onClick={() => {
-              props.updateJsonFunc(item.provider, item.tf_key, item.extra, null, getNodeId());
-              props.addNodeFunc(item.name, item.provider, item.tf_key, item.extra)
+              props.addNodeFunc(item.name, item.provider, item.tf_key, item.extra, getNodeId())
             }}>
             {item.name}</li>
         ))}
