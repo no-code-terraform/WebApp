@@ -6,7 +6,6 @@ import "bulma/css/bulma.min.css";
 import "./index.scss";
 import {applyNodeChanges, useNodesState} from "reactflow";
 import {saveAs} from "file-saver";
-import { config } from "process";
 
 const Index = (): JSX.Element => {
   const location = useLocation();
@@ -40,17 +39,32 @@ const Index = (): JSX.Element => {
 
   const generateJsonFile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log(json)
-    // fetch('http://127.0.0.1:8000/api/tf/', {
-    //   method: 'POST',
-    //   body: JSON.stringify(json),
-    // })
-    //   .then(res => res.blob())
-    //   .then(blob => saveAs(blob, 'tfmaker.zip'))
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
+    fetch('http://127.0.0.1:8000/api/tf/', {
+      method: 'POST',
+      body: JSON.stringify(removeIdKeys(json)),
+    })
+      .then(res => res.blob())
+      .then(blob => saveAs(blob, 'tfmaker.zip'))
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
+
+  const removeIdKeys = (object: { [x: string]: any; stages?: string[]; providers?: { aws: { region: string; services: {}; }; gcp: { region: string; project: string; services: {}; }; }; }) => {
+    for (let key in object) {
+      for (let secondKey in object[key]) {
+        for (let thirdKey in object[key][secondKey]) {
+          for (let fourKey in object[key][secondKey][thirdKey]) {
+            if (Array.isArray(object[key][secondKey][thirdKey][fourKey])) {
+              // @ts-ignore
+              object[key][secondKey][thirdKey][fourKey] = object[key][secondKey][thirdKey][fourKey].map(({id,...rest}) => ({...rest}))
+            }
+          }
+        }
+      }
+    }
+    return object;
+  }
 
   const updateConfigInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any, serviceId: any) => {
     // @ts-ignore
@@ -81,8 +95,6 @@ const Index = (): JSX.Element => {
     });
 
     configObject = arr;
-
-    delete newObject.id
 
     configObject.push(newObject)
 
@@ -115,29 +127,34 @@ const Index = (): JSX.Element => {
 
     const configServiceWithId = { ...configService, id: serviceId };
 
-    // @ts-ignore
-    if (serviceName in json.providers[providerName].services) {
-      // @ts-ignore
-      json.providers[providerName].services[serviceName].push(configServiceWithId)
-    } else {
-      setJson({...json,
-        providers: {
-          ...json.providers,
-          [providerName]: {
+    setJson((prevState) => ({
+      ...prevState,
+      providers: {
+        ...prevState.providers,
+        [providerName]: {
+          // @ts-ignore
+          ...prevState.providers[providerName],
+          services: {
             // @ts-ignore
-            ...json.providers[providerName],
-            services: {
-              // @ts-ignore
-              ...json.providers[providerName].services,
-              [serviceName]: [
-                configServiceWithId
-              ],
-            }
+            ...prevState.providers[providerName].services,
+            // @ts-ignore
+            [serviceName]: test(prevState.providers[providerName].services, configServiceWithId, serviceName)
           }
         }
-      })
-    }
+      }
+    }))
   };
+
+  const test = (service: any, newService: any, serviceName: any) => {
+    if (!service[serviceName]) {
+      const array = []
+      array.push(newService)
+      return array
+    } else {
+      service[serviceName].push(newService)
+      return service[serviceName]
+    }
+  }
 
   const getNodeId = () => {
     return Math.floor((1 + Math.random()) * 0x10000)

@@ -5,41 +5,38 @@ import "bulma/css/bulma.min.css";
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
-  const [hasBeenUpdated, setHasBeenUpdated] = useState(false);
 
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     let serviceWithConfig: {} = {};
     setIsOpen(true)
-    setHasBeenUpdated(true)
 
     // @ts-ignore
     const config = ref.current.querySelectorAll('.config');
 
     config.forEach((item: any) => {
       // @ts-ignore
-      if (item.dataset.configType) serviceWithConfig[item.dataset.configName] = item.value.split(',');
+      if (item.dataset.configType) serviceWithConfig[item.dataset.name] = item.value.split(',');
 
       else {
-
-        if (item.dataset.configName.split('.')[1]) {
+        if (item.dataset.name.split('.')[1]) {
 
           // @ts-ignore
-          serviceWithConfig[item.dataset.configName.split('.')[0]] = {};
+          serviceWithConfig[item.dataset.name.split('.')[0]] = {};
 
         } else {
 
           // @ts-ignore
-          serviceWithConfig[item.dataset.configName] = item.value;
+          serviceWithConfig[item.dataset.name] = item.value;
 
         }
       }
     })
 
     config.forEach((item: any) => {
-      if (item.dataset.configName.split('.')[1]) {
+      if (item.dataset.name.split('.')[1]) {
         // @ts-ignore
-        serviceWithConfig[item.dataset.configName.split('.')[0]][item.dataset.configName.split('.')[1]] = item.value;
+        serviceWithConfig[item.dataset.name.split('.')[0]][item.dataset.name.split('.')[1]] = item.value;
       }
     })
 
@@ -69,15 +66,11 @@ export const ServiceNode = ({ data }: any) => {
                 <span data-config-text={item.name.replace('.', "")}>{item?.default}</span></p>
             ))}
 
-            {!hasBeenUpdated ?
-              <button
-                onClick={() => setIsOpen(false)}
-              >
-                Edit
-              </button>
-              :
-              <></>
-            }
+            <button
+              onClick={() => setIsOpen(false)}
+            >
+              Edit
+            </button>
           </div>
           <div className="text-updater-node" style={{display: isOpen ? 'none':''}}>
             <h1>Edit Service</h1>
@@ -90,6 +83,7 @@ export const ServiceNode = ({ data }: any) => {
                       {item.choices}
                       <input
                         className="input config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         type="text"
                         defaultValue={item.default != null ? item.default : ''}
@@ -102,6 +96,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       <select
                         className="config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         defaultValue={item.default != null ? item.default : ''}
                         onChange={(e) => handleChange(e, item.name)}
@@ -117,6 +112,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       <input
                         className="input config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         data-config-type={item.type}
                         type="text"
@@ -131,6 +127,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       <select
                         className="config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         multiple
                       >
@@ -145,6 +142,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       <input
                         className="input config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         type="number"
                         min={item?.min}
@@ -159,6 +157,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       <select
                         className="config"
+                        data-name={item.name}
                         data-config-name={item.name.replace('.', "")}
                         defaultValue={item.default != null ? item.default : null}
                         onChange={(e) => handleChange(e, item.name)}
