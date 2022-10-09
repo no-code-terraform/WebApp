@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
 import "reactflow/dist/style.css";
-import "./index.css";
+import "./index.scss";
 
 import { ServiceNode } from "../ServiceNode";
 

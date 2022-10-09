@@ -67,18 +67,14 @@ const Index = (): JSX.Element => {
   }
 
   const updateConfigInJson = (providerName: string, serviceName: any, extras: any, serviceWithConfig: any, serviceId: any) => {
-    // @ts-ignore
-    setJson((prevState) => ({
+    setJson((prevState: any) => ({
       ...prevState,
       providers: {
         ...prevState.providers,
         [providerName]: {
-          // @ts-ignore
           ...prevState.providers[providerName],
           services: {
-            // @ts-ignore
             ...prevState.providers[providerName].services,
-            // @ts-ignore
             [serviceName]: changeConfigObject(prevState.providers[providerName].services[serviceName], serviceWithConfig, serviceId),
 
           }
@@ -102,17 +98,13 @@ const Index = (): JSX.Element => {
   }
 
   const updateServiceInJson = (providerName: string, serviceName: any, extras: any, serviceId: any) => {
-    let configService: {} = {};
+    let configService: any = {};
 
     extras.forEach((config: any) => {
       if (config.name.split('.')[1]) {
-
-        // @ts-ignore
         configService[config.name.split('.')[0]] = {};
 
       } else {
-
-        // @ts-ignore
         configService[config.name] = (config.default as any ? config.default : '');
 
       }
@@ -120,24 +112,20 @@ const Index = (): JSX.Element => {
 
     extras.forEach((config: any) => {
       if (config.name.split('.')[1]) {
-        // @ts-ignore
         configService[config.name.split('.')[0]][config.name.split('.')[1]] = (config.default as any ? config.default : '');
       }
     })
 
     const configServiceWithId = { ...configService, id: serviceId };
 
-    setJson((prevState) => ({
+    setJson((prevState: any) => ({
       ...prevState,
       providers: {
         ...prevState.providers,
         [providerName]: {
-          // @ts-ignore
           ...prevState.providers[providerName],
           services: {
-            // @ts-ignore
             ...prevState.providers[providerName].services,
-            // @ts-ignore
             [serviceName]: test(prevState.providers[providerName].services, configServiceWithId, serviceName)
           }
         }

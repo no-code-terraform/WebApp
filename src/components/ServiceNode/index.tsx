@@ -3,39 +3,32 @@ import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
 
 export const ServiceNode = ({ data }: any) => {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(true);
 
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    let serviceWithConfig: {} = {};
+    let serviceWithConfig: any = {};
     setIsOpen(true)
 
-    // @ts-ignore
-    const config = ref.current.querySelectorAll('.config');
+    const config = ref?.current?.querySelectorAll('.config');
 
-    config.forEach((item: any) => {
-      // @ts-ignore
+    config?.forEach((item: any) => {
       if (item.dataset.configType) serviceWithConfig[item.dataset.name] = item.value.split(',');
 
       else {
         if (item.dataset.name.split('.')[1]) {
-
-          // @ts-ignore
           serviceWithConfig[item.dataset.name.split('.')[0]] = {};
 
         } else {
-
-          // @ts-ignore
           serviceWithConfig[item.dataset.name] = item.value;
 
         }
       }
     })
 
-    config.forEach((item: any) => {
+    config?.forEach((item: any) => {
       if (item.dataset.name.split('.')[1]) {
-        // @ts-ignore
         serviceWithConfig[item.dataset.name.split('.')[0]][item.dataset.name.split('.')[1]] = item.value;
       }
     })
@@ -46,10 +39,8 @@ export const ServiceNode = ({ data }: any) => {
   }
 
   const handleChange = (e: any, name: any) => {
-    // @ts-ignore
-    const configText = ref.current.querySelector(`[data-config-text=${name.replace('.', "")}]`);
-    // @ts-ignore
-    const configInput = ref.current.querySelector(`input[data-config-name=${name.replace('.', "")}]`);
+    const configText = ref?.current?.querySelector(`[data-config-text=${name.replace('.', "")}]`);
+    const configInput = ref?.current?.querySelector(`input[data-config-name=${name.replace('.', "")}]`);
 
     configText.innerHTML = e.currentTarget.value
     configInput.value = e.currentTarget.value;
