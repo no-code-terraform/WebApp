@@ -39,8 +39,8 @@ export const ServiceNode = ({ data }: any) => {
   }
 
   const handleChange = (e: any, name: any) => {
-    const configText = ref?.current?.querySelector(`[data-config-text=${name.replace('.', "")}]`);
-    const configInput = ref?.current?.querySelector(`input[data-config-name=${name.replace('.', "")}]`);
+    const configText = ref?.current?.querySelector(`[data-config-text=${name?.replace('.', "")}]`);
+    const configInput = ref?.current?.querySelector(`input[data-config-name=${name?.replace('.', "")}]`);
 
     configText.innerHTML = e.currentTarget.value
     configInput.value = e.currentTarget.value;
@@ -54,7 +54,7 @@ export const ServiceNode = ({ data }: any) => {
             <p>Service : {data.label}</p>
             {data.extras && data.extras.map((item: any) => (
               <p key={item.name}>{item.name} :
-                <span data-config-text={item.name.replace('.', "")}>{item?.default}</span></p>
+                <span data-config-text={item?.name?.replace('.', "")}>{item?.default}</span></p>
             ))}
 
             <button
@@ -75,7 +75,7 @@ export const ServiceNode = ({ data }: any) => {
                       <input
                         className="input config"
                         data-name={item.name}
-                        data-config-name={item.name.replace('.', "")}
+                        data-config-name={item?.name?.replace('.', "")}
                         type="text"
                         defaultValue={item.default != null ? item.default : ''}
                         onChange={(e) => handleChange(e, item.name)}
@@ -88,7 +88,7 @@ export const ServiceNode = ({ data }: any) => {
                       <select
                         className="config"
                         data-name={item.name}
-                        data-config-name={item.name.replace('.', "")}
+                        data-config-name={item?.name?.replace('.', "")}
                         defaultValue={item.default != null ? item.default : ''}
                         onChange={(e) => handleChange(e, item.name)}
                       >
@@ -104,7 +104,7 @@ export const ServiceNode = ({ data }: any) => {
                       <input
                         className="input config"
                         data-name={item.name}
-                        data-config-name={item.name.replace('.', "")}
+                        data-config-name={item?.name?.replace('.', "")}
                         data-config-type={item.type}
                         type="text"
                         defaultValue={item.default != null ? item.default : ''}
@@ -134,7 +134,7 @@ export const ServiceNode = ({ data }: any) => {
                       <input
                         className="input config"
                         data-name={item.name}
-                        data-config-name={item.name.replace('.', "")}
+                        data-config-name={item?.name?.replace('.', "")}
                         type="number"
                         min={item?.min}
                         max={item?.max}
@@ -149,7 +149,7 @@ export const ServiceNode = ({ data }: any) => {
                       <select
                         className="config"
                         data-name={item.name}
-                        data-config-name={item.name.replace('.', "")}
+                        data-config-name={item?.name?.replace('.', "")}
                         defaultValue={item.default != null ? item.default : null}
                         onChange={(e) => handleChange(e, item.name)}
                       >
