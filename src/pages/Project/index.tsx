@@ -126,14 +126,14 @@ const Index = (): JSX.Element => {
           ...prevState.providers[providerName],
           services: {
             ...prevState.providers[providerName].services,
-            [serviceName]: test(prevState.providers[providerName].services, configServiceWithId, serviceName)
+            [serviceName]: updateService(prevState.providers[providerName].services, configServiceWithId, serviceName)
           }
         }
       }
     }))
   };
 
-  const test = (service: any, newService: any, serviceName: any) => {
+  const updateService = (service: any, newService: any, serviceName: any) => {
     if (!service[serviceName]) {
       const array = []
       array.push(newService)
