@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
-import './index.scss'
+import EditSidebar from "../EditSidebar"
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
@@ -82,6 +82,7 @@ export const ServiceNode = ({ data }: any) => {
           className="text-updater-node"
           style={{ display: isOpen ? "none" : "" }}
         >
+          { isOpen ? <EditSidebar data={data} handleChange={handleChange} editConfigs={editConfigs}/> : null }
           <h1>Edit Service</h1>
           {(() => {
             return data.extras.map((item: any) => {

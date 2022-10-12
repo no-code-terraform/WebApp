@@ -16,7 +16,6 @@ const Sidebar = (props: {
           item.provider === "aws" ? (   
         <ul className="has-details">
             <li
-              className="has-details"
               key={item.name}
               onClick={() => {
                 props.addNodeFunc(
@@ -28,9 +27,9 @@ const Sidebar = (props: {
                 );
               }}
             >
-              <a href={item.name}>{item.name}</a>
+              <a>{item.name}</a>
             </li>
-            <li className="details">{item.description} <a>{item.url}</a></li>
+            <li className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></li>
         </ul>
           ) : null
         )}
@@ -52,9 +51,9 @@ const Sidebar = (props: {
                 );
               }}
             >
-              <a href={item.name}>{item.name}</a>
+              <a>{item.name}</a>
             </li>
-            {/* <li className="details">{item.description} <a>{item.url}</a></li> */}
+            <li className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></li>
         </ul>
           ) : null
         )}
