@@ -25,7 +25,7 @@ const Sidebar = (props: {
                 );
               }}
             >
-              {item.name}
+              <a>{item.name}</a>
             </li>
           ) : null
         )}
@@ -45,7 +45,7 @@ const Sidebar = (props: {
                 );
               }}
             >
-              {item.name}
+              <a>{item.name}</a>
             </li>
           ) : null
         )}
