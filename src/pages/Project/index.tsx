@@ -10,7 +10,8 @@ import {saveAs} from "file-saver";
 const Index = (): JSX.Element => {
   const location = useLocation();
   const data: any = location.state;
-  const yPos = useRef(0);
+  const yPos = useRef(250);
+  const xPos = useRef(0);
   const [nodes, setNodes] = useNodesState(data.infoProject.nodes);
   const [servicesApi, setServicesApi] = useState([]);
   const [json, setJson] = useState({
@@ -161,7 +162,7 @@ const Index = (): JSX.Element => {
   const onAdd = useCallback(
     (labelNode: any, providerNode: any, tfkeyNode: any, extras: any, serviceId: any) => {
       updateServiceInJson(providerNode, tfkeyNode, extras, serviceId)
-      yPos.current += 50;
+      xPos.current += 300;
       const newNode = {
         id: getNodeId(),
         type: "textUpdater",
@@ -174,7 +175,7 @@ const Index = (): JSX.Element => {
           id: serviceId,
         },
         position: {
-          x: 250,
+          x: xPos.current,
           y: yPos.current,
         },
       };

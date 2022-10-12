@@ -68,14 +68,14 @@ export const ServiceNode = ({ data }: any) => {
           {data.extras &&
             data.extras.map((item: any) => (
               <p key={item.name}>
-                {item.name} :
+                {item.name}:
                 <span data-config-text={item?.name?.replace(".", "")}>
                   {item?.default}
                 </span>
               </p>
             ))}
 
-          <button onClick={() => setIsOpen(false)}>Edit</button>
+          <a style={{marginTop: "5px"}} className="button is-small is-primary" onClick={() => setIsOpen(false)}>Edit</a>
         </div>
         <div
           className="text-updater-node"
@@ -91,7 +91,7 @@ export const ServiceNode = ({ data }: any) => {
                       <label>{item.name}</label>
                       {item.choices}
                       <input
-                        className="input config"
+                        className="input config is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
                         type="text"
@@ -102,10 +102,10 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "string" && item.choices != null:
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{marginTop: "10px"}} key={item.name}>
+                      <label style={{marginRight: "10px"}} >{item.name}</label>
                       <select
-                        className="config"
+                        className="config select is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
                         defaultValue={item.default != null ? item.default : ""}
@@ -127,7 +127,7 @@ export const ServiceNode = ({ data }: any) => {
                     <fieldset key={item.name}>
                       <label>{item.name}</label>
                       <input
-                        className="input config"
+                        className="input config is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
                         data-config-type={item.type}
@@ -142,10 +142,10 @@ export const ServiceNode = ({ data }: any) => {
                   item.choices != null &&
                   item.is_multiple_choice == true:
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{marginTop: "10px"}} key={item.name}>
+                      <label style={{marginRight: "10px"}}>{item.name}</label>
                       <select
-                        className="config"
+                        className="config select is-info is-small"
                         data-name={item.name}
                         data-config-name={item.name.replace(".", "")}
                         multiple
@@ -164,7 +164,7 @@ export const ServiceNode = ({ data }: any) => {
                     <fieldset key={item.name}>
                       <label>{item.name}</label>
                       <input
-                        className="input config"
+                        className="input config is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
                         type="number"
@@ -177,10 +177,10 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "boolean":
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{marginTop: "10px"}} key={item.name}>
+                      <label style={{marginRight: "10px"}}>{item.name}</label>
                       <select
-                        className="config"
+                        className="config select is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
                         defaultValue={
@@ -198,7 +198,7 @@ export const ServiceNode = ({ data }: any) => {
               }
             });
           })()}
-          <button onClick={(e) => editConfigs(e)}>
+          <button style={{marginTop: "10px"}} className="button is-success is-light is-small" onClick={(e) => editConfigs(e)}>
             Validate the configuration
           </button>
         </div>

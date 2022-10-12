@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.scss";
 
 const Sidebar = (props: {
   addNodeFunc: any;
@@ -12,8 +13,10 @@ const Sidebar = (props: {
       <p className="menu-label">AWS</p>
       {props.data &&
         props.data.map((item: any) =>
-          item.provider === "aws" ? (
+          item.provider === "aws" ? (   
+        <ul className="has-details">
             <li
+              className="has-details"
               key={item.name}
               onClick={() => {
                 props.addNodeFunc(
@@ -25,15 +28,19 @@ const Sidebar = (props: {
                 );
               }}
             >
-              <a>{item.name}</a>
+              <a href={item.name}>{item.name}</a>
             </li>
+            <li className="details">{item.description} <a>{item.url}</a></li>
+        </ul>
           ) : null
         )}
       <p className="menu-label">GCP</p>
       {props.data &&
         props.data.map((item: any) =>
           item.provider === "gcp" ? (
+            <ul className="has-details">
             <li
+              className="has-details"
               key={item.name}
               onClick={() => {
                 props.addNodeFunc(
@@ -45,8 +52,10 @@ const Sidebar = (props: {
                 );
               }}
             >
-              <a>{item.name}</a>
+              <a href={item.name}>{item.name}</a>
             </li>
+            <li className="details">{item.description} <a>{item.url}</a></li>
+        </ul>
           ) : null
         )}
     </aside>

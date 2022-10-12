@@ -1,0 +1,17 @@
+.details {
+    position: absolute;
+    top: 0;
+    transform: translateY(70%) scale(0);
+    transition: transform 0s ease-in;
+    transform-origin: left;
+    display: inline;
+    background: white;
+    z-index: 20;
+    min-width: 100%;
+    padding: 1rem;
+    border: 1px solid black;
+  }
+  
+  .has-details:hover .details {
+    transform: translateY(100%) scale(1);
+  }
