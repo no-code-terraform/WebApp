@@ -54,7 +54,7 @@ const Sidebar = (props: {
             >
               <a href={item.name}>{item.name}</a>
             </li>
-            <li className="details">{item.description} <a>{item.url}</a></li>
+            {/* <li className="details">{item.description} <a>{item.url}</a></li> */}
         </ul>
           ) : null
         )}

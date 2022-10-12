@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
+import './index.scss'
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);

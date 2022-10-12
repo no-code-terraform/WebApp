@@ -1,0 +1,14 @@
+.details {
+    position: absolute;
+    right: 0;
+    // transform: translateY(70%) scale(0);
+    // transition: transform 0s ease-in;
+    // transform-origin: left;
+    display: inline;
+    background: white;
+    z-index: 20;
+    height: 100%;
+    width: 240%;
+    padding: 1rem;
+    border: 1px solid black;
+  }
