@@ -12,12 +12,10 @@ Tfmaker, a GUI in your browser to draw your cloud infrastructure and generate yo
 
 - Run `npm i`
 
-### Get started 
+### Get started
 
 - Run `npm run start`
 
 ### Test
 
-- Run `npm run test` 
-
-
+- Run `npm run test`

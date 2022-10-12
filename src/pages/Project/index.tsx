@@ -23,7 +23,15 @@ const Index = (): JSX.Element => {
       "gcp": {
         "region": "europe-west9-a",
         "project": "notional-yeti-343410",
-        "services": {}
+        "services": {
+          "gci": [
+            {
+              "gci_name": "application",
+              "gci_type": "f1-micro",
+              "region": "us-central1-c"
+            }
+          ],
+        }
       }
     }
   });
@@ -183,7 +191,7 @@ const Index = (): JSX.Element => {
   return (
     <React.Fragment>
       <section className="page-project columns">
-        <div className="column is-2">
+        <div style={{ borderRight: "solid"}} className="column is-2">
           <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json}/>
         </div>
         <div className="column is-10e">

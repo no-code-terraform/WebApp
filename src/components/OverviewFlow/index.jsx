@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
 import "reactflow/dist/style.css";
 import "./index.scss";
@@ -15,19 +15,19 @@ const OverviewFlow = (props) => {
 
   return (
     <>
-    <ReactFlow
-      nodes={nodes}
-      onNodesChange={props.onNodesChange}
-      fitView
-      nodeTypes={nodeTypes}
-      attributionPosition="top-right"
-    >
-      <MiniMap
-        nodeStrokeColor={(n) => {
-          if (n.style?.background) return n.style.background;
-          if (n.type === "input") return "#0041d0";
-          if (n.type === "output") return "#ff0072";
-          if (n.type === "default") return "#1a192b";
+      <ReactFlow
+        nodes={nodes}
+        onNodesChange={props.onNodesChange}
+        fitView
+        nodeTypes={nodeTypes}
+        attributionPosition="top-right"
+      >
+        <MiniMap
+          nodeStrokeColor={(n) => {
+            if (n.style?.background) return n.style.background;
+            if (n.type === "input") return "#0041d0";
+            if (n.type === "output") return "#ff0072";
+            if (n.type === "default") return "#1a192b";
 
             return "#eee";
           }}
