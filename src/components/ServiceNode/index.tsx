@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
 import EditSidebar from "../EditSidebar";
@@ -75,8 +75,9 @@ export const ServiceNode = ({ data }: any) => {
 
   return (
     <>
-      <div ref={ref}>
+      <div className={'serviceNode-' + data.id} ref={ref}>
         <Handle type="target" position={Position.Top} />
+        <Handle type="source" position={Position.Bottom} />
         <div
           className="text-updater-node"
           style={{ display: isOpen ? "" : "none" }}

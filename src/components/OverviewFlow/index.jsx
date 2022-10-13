@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import ReactFlow, { MiniMap, Controls, Background } from "reactflow";
+import React, {useEffect, useMemo, useState} from "react";
+import ReactFlow, {MiniMap, Controls, Background} from "reactflow";
 import "reactflow/dist/style.css";
 import "./index.scss";
-
-import { ServiceNode } from "../ServiceNode";
+import {ServiceNode} from "../ServiceNode";
 
 const OverviewFlow = (props) => {
   const [nodes, changeNodes] = useState(props.nodes);
@@ -16,8 +15,11 @@ const OverviewFlow = (props) => {
   return (
     <>
       <ReactFlow
-        nodes={nodes}
+        nodes={props.nodes}
+        edges={props.edges}
         onNodesChange={props.onNodesChange}
+        onEdgesChange={props.onEdgesChange}
+        onConnect={props.onConnect}
         fitView
         nodeTypes={nodeTypes}
         attributionPosition="top-right"
