@@ -105,24 +105,15 @@ export const ServiceNode = ({ data }: any) => {
             <strong>{data.label}</strong>
           </h1>
           {data.extras &&
-            data.extras.map((item: any) => (
-              <p key={item.name}>
-                {item.name} :
-                <span data-config-text={item?.name?.replace(".", "")}>
-                  {(item.type === "array" &&
-                    item.choices != null &&
-                    item.is_multiple_choice == true ? item.choices[0] : item?.default)}
-                </span>
-              </p>
-            ))}
-          {data.extras &&
             data.extras.map((item: any) => { 
               const display: string = displayHidden(item.is_required, showRequired);
               return (
                <p style={{ marginTop: "7px", display: display }} key={item.name}>
               <strong>{`${item.name}: `}</strong>
               <span data-config-text={item?.name?.replace(".", "")}>
-                {item?.default}
+                {(item.type === "array" &&
+                item.choices != null &&
+                item.is_multiple_choice == true ? item.choices[0] : item?.default)}
               </span>
             </p> 
             )})}

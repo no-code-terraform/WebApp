@@ -235,7 +235,7 @@ const Index = (): JSX.Element => {
         <div style={{ borderRight: "solid"}} className="column is-2">
           <Sidebar data={servicesApi} addNodeFunc={onAdd} jsonCurr={json}/>
         </div>
-        <div className="column is-10e">
+        <div className="column is-10e" style={{display: "flex", flexDirection: "column"}}>
           <div className="p-1 is-flex is-justify-content-space-between is-align-items-center">
             <p>{data.infoProject.name}</p>
             <button
