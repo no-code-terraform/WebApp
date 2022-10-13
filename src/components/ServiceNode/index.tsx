@@ -65,11 +65,11 @@ export const ServiceNode = ({ data }: any) => {
           className="text-updater-node"
           style={{ display: isOpen ? "" : "none" }}
         >
-          <p>Service : {data.label}</p>
+          <h1 style={{ marginBottom: "20px", marginTop:"15px" }}><strong>{data.label}</strong></h1>
           {data.extras &&
             data.extras.map((item: any) => (
-              <p key={item.name}>
-                {item.name}:
+              <p style={{ marginTop: "7px" }} key={item.name}>
+                {`${item.name}: `}
                 <span data-config-text={item?.name?.replace(".", "")}>
                   {item?.default}
                 </span>
