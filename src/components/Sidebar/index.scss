@@ -1,17 +1,22 @@
 .details {
     position: absolute;
-    top: 0;
     transform: translateY(70%) scale(0);
+    top:100;
+    left: 0;
+    bottom: 0;
+    right: 0;
+ //   width: 500px;
+//  height: 200px;
     transition: transform 0s ease-in;
     transform-origin: left;
-    display: inline;
+    display: block;
     background: white;
-    z-index: 20;
-    min-width: 100%;
+   // z-index: 20;
+    // min-width: 100%;
     padding: 1rem;
     border: 1px solid black;
   }
   
-  .has-details:hover .details {
-    transform: translateY(100%) scale(1);
-  }
+  // .has-details:hover .details {
+  //   transform: translateY(100%) scale(1);
+  // }

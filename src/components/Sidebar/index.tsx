@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./index.scss";
 
 const Sidebar = (props: {
@@ -8,13 +8,15 @@ const Sidebar = (props: {
 }): JSX.Element => {
   const getNodeId = () => `id_${+new Date()}`;
   return (
-    <aside className="menu">
+    <div>
+      <aside  className="menu">
       <p className="menu-label">List of services</p>
       <p className="menu-label">AWS</p>
       {props.data &&
         props.data.map((item: any) =>
           item.provider === "aws" ? (   
-        <ul className="has-details">
+          <>
+          <ul>
             <li
               key={item.name}
               onClick={() => {
@@ -28,17 +30,21 @@ const Sidebar = (props: {
               }}
             >
               <a>{item.name}</a>
-              <a style={{width: "5px", height:"20px"}} className="has-details button is-info is-small">Info</a>
             </li>
-            <li className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></li>
+            {/* <a style={{ height: "25px", width:"25px", borderRadius:"50%" }} className="has-details">Info</a> */}
+           <li style={{position: "relative"}}>
+             <p>prout</p>
+           <div className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></div>  
+            </li> 
         </ul>
+                </>
           ) : null
         )}
       <p className="menu-label">GCP</p>
       {props.data &&
         props.data.map((item: any) =>
           item.provider === "gcp" ? (
-            <ul className="has-details">
+            <ul >
             <li
               className="has-details"
               key={item.name}
@@ -59,6 +65,7 @@ const Sidebar = (props: {
           ) : null
         )}
     </aside>
+    </div>
   );
 };
 
