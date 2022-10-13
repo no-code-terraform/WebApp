@@ -28,6 +28,7 @@ const Sidebar = (props: {
               }}
             >
               <a>{item.name}</a>
+              <a style={{width: "5px", height:"20px"}} className="has-details button is-info is-small">Info</a>
             </li>
             <li className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></li>
         </ul>
