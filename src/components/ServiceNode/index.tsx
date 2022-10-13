@@ -5,6 +5,8 @@ import EditSidebar from "../EditSidebar";
 import { ReactComponent as Awslogo } from "../../asset/logo/ec2.svg";
 import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
 import { ReactComponent as Gearlogo } from "../../asset/logo/gear.svg";
+import LoadBalancer from "../../asset/logo/load_balaner.png"
+import PubSub from "../../asset/logo/pub-sub.png"
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
@@ -75,7 +77,7 @@ export const ServiceNode = ({ data }: any) => {
     } 
     return "block"
   }
-
+  console.log(data)
   return (
     <>
       <div className={'serviceNode-' + data.id} ref={ref}>
@@ -92,16 +94,21 @@ export const ServiceNode = ({ data }: any) => {
               display: "flex",
               alignItems: "center",
             }}
-          >
-            {data.provider === "aws" ? (
-              <Awslogo
-                style={{ height: "20px", width: "20px", marginRight: "10px" }}
-              />
-            ) : (
-              <Gcplogo
-                style={{ height: "20px", width: "20px", marginRight: "10px" }}
-              />
-            )}{" "}
+          > 
+            {(() => {
+              switch (data.label) {
+                case "Amazon EC2":
+                  return <Awslogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                case "Elastic Load Balancing":
+                  return <img style={{ height: "20px", width: "20px", marginRight: "10px" }} src={LoadBalancer} alt="Elastic Load Balancing" />
+                case "Compute Engine":
+                    return <Gcplogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                case "Pub/Sub":
+                    return <img style={{ height: "20px", width: "20px", marginRight: "10px" }} src={PubSub} alt="Compute Engine" />
+                default:
+                  return null                    
+              }
+            })()}
             <strong>{data.label}</strong>
           </h1>
           {data.extras &&
