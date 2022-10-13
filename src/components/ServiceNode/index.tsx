@@ -117,7 +117,7 @@ export const ServiceNode = ({ data }: any) => {
               </span>
             </p> 
             )})}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "15px" }}>
           <a
             style={{ marginTop: "5px" }}
             className="button is-small is-primary"
@@ -143,7 +143,7 @@ export const ServiceNode = ({ data }: any) => {
               editConfigs={editConfigs}
             />
           ) : null}
-          <h1>Edit Service</h1>
+          <h1><strong>Edit Service</strong></h1>
           {(() => {
             return data.extras.map((item: any) => {
               const display: string = displayHidden(item.is_required, showRequired);
@@ -264,7 +264,7 @@ export const ServiceNode = ({ data }: any) => {
               }
             });
           })()}
-        <div style={{display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+        <div style={{display: "flex", justifyContent: "space-around", alignItems: "center", marginTop: "15px"}}>
         <button
             style={{ marginTop: "10px" }}
             className="button is-success is-light is-small"

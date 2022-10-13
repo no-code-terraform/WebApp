@@ -7,11 +7,17 @@ const Sidebar = (props: {
   data: any;
 }): JSX.Element => {
   const getNodeId = () => `id_${+new Date()}`;
+  const [awsOption, setAwsOption] = useState(false)
+  const [gcpOption, setGcpOption] = useState(false)
   return (
     <div>
       <aside  className="menu">
       <p className="menu-label">List of services</p>
-      <p className="menu-label">AWS</p>
+      <a onClick={() => setAwsOption(!awsOption)} className="menu-label"><strong>AWS</strong></a>
+      <div style={{ display: awsOption ? "block" : "none", marginTop: "10px;", marginBottom: "10px" }}>
+        <p style={{ marginTop: "10px"}}>region: <input style={{ width: "100px" }}/></p>
+        <button  style={{ marginTop: "15px"}} className="button is-success is-small" onClick={() => setAwsOption(true)}>test</button>
+      </div>
       {props.data &&
         props.data.map((item: any) =>
           item.provider === "aws" ? (   
@@ -35,7 +41,12 @@ const Sidebar = (props: {
                 </>
           ) : null
         )}
-      <p className="menu-label">GCP</p>
+      <a onClick={() => setGcpOption(!gcpOption)} className="menu-label"><strong>GCP</strong></a>
+      <div style={{ display: gcpOption ? "block" : "none", marginTop: "10px;", marginBottom: "10px" }}>
+        <p style={{ marginBottom: "10px", marginTop: "10px"}}>region: <input style={{ width: "100px" }}/></p>
+        <p>project: <input style={{ width: "100px" }}/></p>
+        <button style={{ marginTop: "15px"}} className="button is-success is-small" onClick={() => setAwsOption(true)}>test</button>
+      </div>
       {props.data &&
         props.data.map((item: any) =>
           item.provider === "gcp" ? (
