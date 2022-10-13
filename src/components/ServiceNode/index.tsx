@@ -4,11 +4,12 @@ import "bulma/css/bulma.min.css";
 import EditSidebar from "../EditSidebar";
 import { ReactComponent as Awslogo } from "../../asset/logo/ec2.svg";
 import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
+import { ReactComponent as Gearlogo } from "../../asset/logo/gear.svg";
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(true);
-  const [showRequired, setshowRequired] = useState(false);
+  const [showRequired, setshowRequired] = useState(true);
 
   const handleRequired = (status: boolean) => {
     console.log("LOLOL", status, !status)
@@ -101,6 +102,7 @@ export const ServiceNode = ({ data }: any) => {
             )}{" "}
             <strong>{data.label}</strong>
           </h1>
+
           {data.extras &&
             data.extras.map((item: any) => { 
               const display: string = displayHidden(item.is_required, showRequired);
@@ -112,6 +114,7 @@ export const ServiceNode = ({ data }: any) => {
               </span>
             </p> 
             )})}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <a
             style={{ marginTop: "5px" }}
             className="button is-small is-primary"
@@ -119,13 +122,12 @@ export const ServiceNode = ({ data }: any) => {
           >
             Edit
           </a>
-          <a
-            style={{ marginTop: "5px" }}
-            className="button is-small is-primary"
+          <p
             onClick={() => handleRequired(showRequired)}
           >
-            Required
-          </a>
+            <Gearlogo style={{ marginTop: "5px", height:"25px", width:"25px" }}/>
+          </p>
+        </div>
         </div>
         <div
           className="text-updater-node"
@@ -141,11 +143,12 @@ export const ServiceNode = ({ data }: any) => {
           <h1>Edit Service</h1>
           {(() => {
             return data.extras.map((item: any) => {
+              const display: string = displayHidden(item.is_required, showRequired);
               switch (true) {
                 case item.type === "string" && item.choices == null:
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{ display: display }} key={item.name}>
+                      <label><strong>{item.name}</strong></label>
                       {item.choices}
                       <input
                         className="input config is-info is-small"
@@ -159,8 +162,8 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "string" && item.choices != null:
                   return (
-                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
-                      <label style={{ marginRight: "10px" }}>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px", display: display }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}><strong>{item.name}</strong></label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -181,8 +184,8 @@ export const ServiceNode = ({ data }: any) => {
                   item.choices == null &&
                   item.is_multiple_choice == null:
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px", display: display }} key={item.name}>
+                      <label><strong>{item.name}</strong></label>
                       <input
                         className="input config is-info is-small"
                         data-name={item.name}
@@ -199,8 +202,8 @@ export const ServiceNode = ({ data }: any) => {
                   item.choices != null &&
                   item.is_multiple_choice == true:
                   return (
-                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
-                      <label style={{ marginRight: "10px" }}>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px", display: display }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}><strong>{item.name}</strong></label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -218,8 +221,8 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "integer":
                   return (
-                    <fieldset key={item.name}>
-                      <label>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px", display: display }} key={item.name}>
+                      <label><strong>{item.name}</strong></label>
                       <input
                         className="input config is-info is-small"
                         data-name={item.name}
@@ -234,8 +237,8 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "boolean":
                   return (
-                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
-                      <label style={{ marginRight: "10px" }}>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px", display: display }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}><strong>{item.name}</strong></label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -255,13 +258,21 @@ export const ServiceNode = ({ data }: any) => {
               }
             });
           })()}
-          <button
+        <div style={{display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+        <button
             style={{ marginTop: "10px" }}
             className="button is-success is-light is-small"
             onClick={(e) => editConfigs(e)}
           >
             Validate the configuration
           </button>
+          <p
+            style={{ right:0, marginTop: "10px" }}
+            onClick={() => handleRequired(showRequired)}
+          >
+            <Gearlogo style={{ marginTop: "5px", height:"25px", width:"25px" }}/>
+          </p>
+        </div>
         </div>
       </div>
     </>
