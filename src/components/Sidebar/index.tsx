@@ -31,11 +31,6 @@ const Sidebar = (props: {
             >
               <a>{item.name}</a>
             </li>
-            {/* <a style={{ height: "25px", width:"25px", borderRadius:"50%" }} className="has-details">Info</a> */}
-           <li style={{position: "relative"}}>
-             <p>Info</p>
-           <div className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></div>  
-            </li> 
         </ul>
                 </>
           ) : null
@@ -46,7 +41,6 @@ const Sidebar = (props: {
           item.provider === "gcp" ? (
             <ul >
             <li
-              className="has-details"
               key={item.name}
               onClick={() => {
                 props.addNodeFunc(
@@ -60,7 +54,6 @@ const Sidebar = (props: {
             >
               <a>{item.name}</a>
             </li>
-            <li className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></li>
         </ul>
           ) : null
         )}
