@@ -56,15 +56,17 @@ export const ServiceNode = ({ data }: any) => {
   };
 
   const handleChange = (e: any, name: any) => {
+    console.log(e)
+    console.log(name)
     const configText = ref?.current?.querySelector(
       `[data-config-text=${name?.replace(".", "")}]`
     );
     const configInput = ref?.current?.querySelector(
-      `input[data-config-name=${name?.replace(".", "")}]`
+      `[data-config-name=${name?.replace(".", "")}]`
     );
 
-    configText.innerHTML = e.currentTarget.value;
-    configInput.value = e.currentTarget.value;
+    configText.innerHTML = e.target.value;
+    configInput.value = e.target.value;
   };
 
   const displayHidden = (isRequired: any, showRequired: boolean): string => {
@@ -102,7 +104,17 @@ export const ServiceNode = ({ data }: any) => {
             )}{" "}
             <strong>{data.label}</strong>
           </h1>
-
+          {data.extras &&
+            data.extras.map((item: any) => (
+              <p key={item.name}>
+                {item.name} :
+                <span data-config-text={item?.name?.replace(".", "")}>
+                  {(item.type === "array" &&
+                    item.choices != null &&
+                    item.is_multiple_choice == true ? item.choices[0] : item?.default)}
+                </span>
+              </p>
+            ))}
           {data.extras &&
             data.extras.map((item: any) => { 
               const display: string = displayHidden(item.is_required, showRequired);
@@ -168,7 +180,8 @@ export const ServiceNode = ({ data }: any) => {
                         className="config select is-info is-small"
                         data-name={item.name}
                         data-config-name={item?.name?.replace(".", "")}
-                        defaultValue={item.default != null ? item.default : ""}
+                        // @ts-ignore
+                        defaultValue={{ label: item.choices[0], value: item.choices[0] }}
                         onChange={(e) => handleChange(e, item.name)}
                       >
                         {item.choices &&
@@ -208,7 +221,9 @@ export const ServiceNode = ({ data }: any) => {
                         className="config select is-info is-small"
                         data-name={item.name}
                         data-config-name={item.name.replace(".", "")}
-                        multiple
+                        // @ts-ignore
+                        defaultValue={{ label: item.choices[0], value: item.choices[0] }}
+                        onChange={(e) => handleChange(e, item.name)}
                       >
                         {item.choices &&
                           item.choices.map((option: any) => (
