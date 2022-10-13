@@ -58,7 +58,7 @@ export const ServiceNode = ({ data }: any) => {
 
   return (
     <>
-      <div ref={ref}>
+      <div className={'serviceNode-' + data.id} ref={ref}>
         <Handle type="target" position={Position.Top} />
         <Handle type="source" position={Position.Bottom} />
         <div

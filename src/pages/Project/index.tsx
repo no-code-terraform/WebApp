@@ -191,23 +191,23 @@ const Index = (): JSX.Element => {
       nds.map((node) => {
         if (node.id === params.source) {
           // @ts-ignore
-          nameDefault = document.querySelector(`input[data-config-name=${node.data.extras[0].name}]`).value;
+          nameDefault = document.querySelector(`.serviceNode-${node.data.id} input[data-config-name=${node.data.extras[0].name}]`).value;
           // @ts-ignore
-          portDefault = document.querySelector(`input[data-config-name=${node.data.extras[3].name}]`).value;
+          portDefault = document.querySelector(`.serviceNode-${node.data.id} input[data-config-name=${node.data.extras[3].name}]`).value;
         }
         if (node.id === params.target) {
           const configNameDefaultText = document.querySelector(
-            `[data-config-text='instances']`
+            `.serviceNode-${node.data.id} [data-config-text='instances']`
           );
           const configNameDefaultInput = document.querySelector(
-            `input[data-config-name='instances']`
+            `.serviceNode-${node.data.id} input[data-config-name='instances']`
           );
 
           const configPortDefaultText = document.querySelector(
-            `[data-config-text='healthChecktarget']`
+            `.serviceNode-${node.data.id} [data-config-text='healthChecktarget']`
           );
           const configPortDefaultInput = document.querySelector(
-            `input[data-config-name='healthChecktarget']`
+            `.serviceNode-${node.data.id} input[data-config-name='healthChecktarget']`
           );
 
 
