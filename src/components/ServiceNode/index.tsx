@@ -1,10 +1,17 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
+import nodesContext from "../OverviewFlow/nodesContext";
 
 export const ServiceNode = ({ data }: any) => {
+  const { nodes, changeNodes } = useContext(nodesContext);
   const ref = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(true);
+  console.log(nodes)
+
+  const deleteNode = (nodes: any) => {
+    nodes.findIndex((object: { id: any; }) => object.id !== object.id))
+  }
 
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -77,7 +84,7 @@ export const ServiceNode = ({ data }: any) => {
             ))}
 
           <button onClick={() => setIsOpen(false)}>Edit</button>
-          <button>Delete</button>
+          <button onClick={() => changeNodes()}>Delete</button>
         </div>
         <div
           className="text-updater-node"

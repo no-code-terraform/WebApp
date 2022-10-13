@@ -4,6 +4,8 @@ import "reactflow/dist/style.css";
 import "./index.scss";
 import {ServiceNode} from "../ServiceNode";
 
+import nodesContext from "./nodesContext";
+
 const OverviewFlow = (props) => {
   const [nodes, changeNodes] = useState(props.nodes);
   const nodeTypes = useMemo(() => ({ textUpdater: ServiceNode }), []);
@@ -13,7 +15,7 @@ const OverviewFlow = (props) => {
   }, [props.nodes]);
   console.log(nodes)
   return (
-    <>
+    <nodesContext.Provider value={{ nodes, changeNodes }}>
       <ReactFlow
         nodes={props.nodes}
         edges={props.edges}
@@ -43,7 +45,7 @@ const OverviewFlow = (props) => {
         <Controls />
         <Background color="#aaa" gap={16} />
       </ReactFlow>
-    </>
+    </nodesContext.Provider>
   );
 };
 
