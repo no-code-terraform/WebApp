@@ -8,7 +8,14 @@ import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [showRequired, setshowRequired] = useState(false);
 
+  const handleRequired = (status: boolean) => {
+    console.log("LOLOL", status, !status)
+    setshowRequired(!status)
+  } 
+
+  console.log(data)
   const editConfigs = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     let serviceWithConfig: any = {};
@@ -59,6 +66,13 @@ export const ServiceNode = ({ data }: any) => {
     configInput.value = e.currentTarget.value;
   };
 
+  const displayHidden = (isRequired: any, showRequired: boolean): string => {
+    if (showRequired && !isRequired) {
+      return "none"
+    } 
+    return "block"
+  }
+
   return (
     <>
       <div ref={ref}>
@@ -87,21 +101,29 @@ export const ServiceNode = ({ data }: any) => {
             <strong>{data.label}</strong>
           </h1>
           {data.extras &&
-            data.extras.map((item: any) => (
-              <p style={{ marginTop: "7px" }} key={item.name}>
-                <strong>{`${item.name}: `}</strong>
-                <span data-config-text={item?.name?.replace(".", "")}>
-                  {item?.default}
-                </span>
-              </p>
-            ))}
-
+            data.extras.map((item: any) => { 
+              const display: string = displayHidden(item.is_required, showRequired);
+              return (
+               <p style={{ marginTop: "7px", display: display }} key={item.name}>
+              <strong>{`${item.name}: `}</strong>
+              <span data-config-text={item?.name?.replace(".", "")}>
+                {item?.default}
+              </span>
+            </p> 
+            )})}
           <a
             style={{ marginTop: "5px" }}
             className="button is-small is-primary"
             onClick={() => setIsOpen(false)}
           >
             Edit
+          </a>
+          <a
+            style={{ marginTop: "5px" }}
+            className="button is-small is-primary"
+            onClick={() => handleRequired(showRequired)}
+          >
+            Required
           </a>
         </div>
         <div
