@@ -4,9 +4,9 @@ import "bulma/css/bulma.min.css";
 import EditSidebar from "../EditSidebar";
 import { ReactComponent as Awslogo } from "../../asset/logo/ec2.svg";
 import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
+import { ReactComponent as LoadBalancer } from "../../asset/logo/aws-elastic-load-balancing.svg";
 import { ReactComponent as Gearlogo } from "../../asset/logo/gear.svg";
-import LoadBalancer from "../../asset/logo/load_balaner.png"
-import PubSub from "../../asset/logo/pub-sub.png"
+import { ReactComponent as PubSub } from "../../asset/logo/google-cloud-pub-sub-logo.svg";
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
@@ -100,11 +100,11 @@ export const ServiceNode = ({ data }: any) => {
                 case "Amazon EC2":
                   return <Awslogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
                 case "Elastic Load Balancing":
-                  return <img style={{ height: "20px", width: "20px", marginRight: "10px" }} src={LoadBalancer} alt="Elastic Load Balancing" />
+                  return <LoadBalancer style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
                 case "Compute Engine":
                     return <Gcplogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
                 case "Pub/Sub":
-                    return <img style={{ height: "20px", width: "20px", marginRight: "10px" }} src={PubSub} alt="Compute Engine" />
+                  return <PubSub style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
                 default:
                   return null                    
               }
