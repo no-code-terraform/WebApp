@@ -22,17 +22,9 @@ const Index = (): JSX.Element => {
         "services": {}
       },
       "gcp": {
-        "region": "europe-west9-a",
-        "project": "notional-yeti-343410",
-        "services": {
-          "gci": [
-            {
-              "gci_name": "application",
-              "gci_type": "f1-micro",
-              "region": "us-central1-c"
-            }
-          ],
-        }
+        "region": "us-central1-c",
+        "project": "axial-chemist-345114",
+        "services": {}
       }
     }
   });
