@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import OverviewFlow from "../../components/OverviewFlow";
 import "bulma/css/bulma.min.css";
 import "./index.scss";
-import {applyNodeChanges, useNodesState} from "reactflow";
+import {addEdge, applyNodeChanges, useEdgesState, useNodesState} from "reactflow";
 import {saveAs} from "file-saver";
 
 const Index = (): JSX.Element => {
@@ -12,6 +12,7 @@ const Index = (): JSX.Element => {
   const data: any = location.state;
   const yPos = useRef(0);
   const [nodes, setNodes] = useNodesState(data.infoProject.nodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [servicesApi, setServicesApi] = useState([]);
   const [json, setJson] = useState({
     "stages": ["production", "staging"],
@@ -183,10 +184,57 @@ const Index = (): JSX.Element => {
     [setNodes]
   );
 
+  const updateServiceWithEdges = (params: any) => {
+    let nameDefault = '';
+    let portDefault = '';
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === params.source) {
+          // @ts-ignore
+          nameDefault = document.querySelector(`input[data-config-name=${node.data.extras[0].name}]`).value;
+          // @ts-ignore
+          portDefault = document.querySelector(`input[data-config-name=${node.data.extras[3].name}]`).value;
+        }
+        if (node.id === params.target) {
+          const configNameDefaultText = document.querySelector(
+            `[data-config-text='instances']`
+          );
+          const configNameDefaultInput = document.querySelector(
+            `input[data-config-name='instances']`
+          );
+
+          const configPortDefaultText = document.querySelector(
+            `[data-config-text='healthChecktarget']`
+          );
+          const configPortDefaultInput = document.querySelector(
+            `input[data-config-name='healthChecktarget']`
+          );
+
+
+          // @ts-ignore
+          configNameDefaultText.innerHTML = nameDefault;
+          // @ts-ignore
+          configNameDefaultInput.value = nameDefault;
+          // @ts-ignore
+          configPortDefaultText.innerHTML = "HTTP:" + portDefault + "/api/healthcheck";
+          // @ts-ignore
+          configPortDefaultInput.value = "HTTP:" + portDefault + "/api/healthcheck";
+        }
+
+        return node;
+      })
+    );
+  }
+
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes]
   );
+
+  const onConnect = useCallback((params: any) => {
+    setEdges((eds) => addEdge(params, eds));
+    updateServiceWithEdges(params);
+  }, []);
 
   return (
     <React.Fragment>
@@ -204,7 +252,7 @@ const Index = (): JSX.Element => {
               Export
             </button>
           </div>
-          <OverviewFlow nodes={nodes} onNodesChange={onNodesChange}/>
+          <OverviewFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} onConnect={onConnect}/>
         </div>
       </section>
     </React.Fragment>
