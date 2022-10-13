@@ -12,7 +12,7 @@ const OverviewFlow = (props) => {
   useEffect(() => {
     changeNodes(props.nodes);
   }, [props.nodes]);
-
+  console.log(nodes)
   return (
     <>
       <ReactFlow

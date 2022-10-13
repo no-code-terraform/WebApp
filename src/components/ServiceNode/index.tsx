@@ -64,7 +64,7 @@ export const ServiceNode = ({ data }: any) => {
           className="text-updater-node"
           style={{ display: isOpen ? "" : "none" }}
         >
-          <p>Service : {data.label}</p>
+          <p>Service: {data.label}</p>
           {data.extras &&
             data.extras.map((item: any) => (
               <p key={item.name}>
@@ -76,6 +76,7 @@ export const ServiceNode = ({ data }: any) => {
             ))}
 
           <button onClick={() => setIsOpen(false)}>Edit</button>
+          <button>Delete</button>
         </div>
         <div
           className="text-updater-node"
