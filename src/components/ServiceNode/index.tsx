@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import "bulma/css/bulma.min.css";
-import EditSidebar from "../EditSidebar"
+import EditSidebar from "../EditSidebar";
+import { ReactComponent as Awslogo } from "../../asset/logo/ec2.svg";
+import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
@@ -65,24 +67,54 @@ export const ServiceNode = ({ data }: any) => {
           className="text-updater-node"
           style={{ display: isOpen ? "" : "none" }}
         >
-          <h1 style={{ marginBottom: "20px", marginTop:"15px" }}><strong>{data.label}</strong></h1>
+          <h1
+            style={{
+              marginBottom: "20px",
+              marginTop: "15px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {data.provider === "aws" ? (
+              <Awslogo
+                style={{ height: "20px", width: "20px", marginRight: "10px" }}
+              />
+            ) : (
+              <Gcplogo
+                style={{ height: "20px", width: "20px", marginRight: "10px" }}
+              />
+            )}{" "}
+            <strong>{data.label}</strong>
+          </h1>
           {data.extras &&
             data.extras.map((item: any) => (
               <p style={{ marginTop: "7px" }} key={item.name}>
-                {`${item.name}: `}
+                <strong>{`${item.name}: `}</strong>
                 <span data-config-text={item?.name?.replace(".", "")}>
                   {item?.default}
                 </span>
               </p>
             ))}
 
-          <a style={{marginTop: "5px"}} className="button is-small is-primary" onClick={() => setIsOpen(false)}>Edit</a>
+          <a
+            style={{ marginTop: "5px" }}
+            className="button is-small is-primary"
+            onClick={() => setIsOpen(false)}
+          >
+            Edit
+          </a>
         </div>
         <div
           className="text-updater-node"
           style={{ display: isOpen ? "none" : "" }}
         >
-          { isOpen ? <EditSidebar data={data} handleChange={handleChange} editConfigs={editConfigs}/> : null }
+          {isOpen ? (
+            <EditSidebar
+              data={data}
+              handleChange={handleChange}
+              editConfigs={editConfigs}
+            />
+          ) : null}
           <h1>Edit Service</h1>
           {(() => {
             return data.extras.map((item: any) => {
@@ -104,8 +136,8 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "string" && item.choices != null:
                   return (
-                    <fieldset style={{marginTop: "10px"}} key={item.name}>
-                      <label style={{marginRight: "10px"}} >{item.name}</label>
+                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}>{item.name}</label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -144,8 +176,8 @@ export const ServiceNode = ({ data }: any) => {
                   item.choices != null &&
                   item.is_multiple_choice == true:
                   return (
-                    <fieldset style={{marginTop: "10px"}} key={item.name}>
-                      <label style={{marginRight: "10px"}}>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}>{item.name}</label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -179,8 +211,8 @@ export const ServiceNode = ({ data }: any) => {
                   );
                 case item.type === "boolean":
                   return (
-                    <fieldset style={{marginTop: "10px"}} key={item.name}>
-                      <label style={{marginRight: "10px"}}>{item.name}</label>
+                    <fieldset style={{ marginTop: "10px" }} key={item.name}>
+                      <label style={{ marginRight: "10px" }}>{item.name}</label>
                       <select
                         className="config select is-info is-small"
                         data-name={item.name}
@@ -200,7 +232,11 @@ export const ServiceNode = ({ data }: any) => {
               }
             });
           })()}
-          <button style={{marginTop: "10px"}} className="button is-success is-light is-small" onClick={(e) => editConfigs(e)}>
+          <button
+            style={{ marginTop: "10px" }}
+            className="button is-success is-light is-small"
+            onClick={(e) => editConfigs(e)}
+          >
             Validate the configuration
           </button>
         </div>

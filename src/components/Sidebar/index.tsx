@@ -33,7 +33,7 @@ const Sidebar = (props: {
             </li>
             {/* <a style={{ height: "25px", width:"25px", borderRadius:"50%" }} className="has-details">Info</a> */}
            <li style={{position: "relative"}}>
-             <p>prout</p>
+             <p>Info</p>
            <div className="details">{item.description} <a onClick={(e) => e.preventDefault()}>{item.url}</a></div>  
             </li> 
         </ul>
