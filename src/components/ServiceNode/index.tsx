@@ -4,7 +4,9 @@ import "bulma/css/bulma.min.css";
 import EditSidebar from "../EditSidebar";
 import { ReactComponent as Awslogo } from "../../asset/logo/ec2.svg";
 import { ReactComponent as Gcplogo } from "../../asset/logo/gcp.svg";
+import { ReactComponent as LoadBalancer } from "../../asset/logo/aws-elastic-load-balancing.svg";
 import { ReactComponent as Gearlogo } from "../../asset/logo/gear.svg";
+import { ReactComponent as PubSub } from "../../asset/logo/google-cloud-pub-sub-logo.svg";
 
 export const ServiceNode = ({ data }: any) => {
   const ref = useRef<any>(null);
@@ -75,7 +77,7 @@ export const ServiceNode = ({ data }: any) => {
     } 
     return "block"
   }
-
+  console.log(data)
   return (
     <>
       <div className={'serviceNode-' + data.id} ref={ref}>
@@ -92,16 +94,21 @@ export const ServiceNode = ({ data }: any) => {
               display: "flex",
               alignItems: "center",
             }}
-          >
-            {data.provider === "aws" ? (
-              <Awslogo
-                style={{ height: "20px", width: "20px", marginRight: "10px" }}
-              />
-            ) : (
-              <Gcplogo
-                style={{ height: "20px", width: "20px", marginRight: "10px" }}
-              />
-            )}{" "}
+          > 
+            {(() => {
+              switch (data.label) {
+                case "Amazon EC2":
+                  return <Awslogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                case "Elastic Load Balancing":
+                  return <LoadBalancer style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                case "Compute Engine":
+                    return <Gcplogo style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                case "Pub/Sub":
+                  return <PubSub style={{ height: "20px", width: "20px", marginRight: "10px" }}/>
+                default:
+                  return null                    
+              }
+            })()}
             <strong>{data.label}</strong>
           </h1>
           {data.extras &&
@@ -117,7 +124,7 @@ export const ServiceNode = ({ data }: any) => {
               </span>
             </p> 
             )})}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "15px" }}>
           <a
             style={{ marginTop: "5px" }}
             className="button is-small is-primary"
@@ -143,7 +150,7 @@ export const ServiceNode = ({ data }: any) => {
               editConfigs={editConfigs}
             />
           ) : null}
-          <h1>Edit Service</h1>
+          <h1><strong>Edit Service</strong></h1>
           {(() => {
             return data.extras.map((item: any) => {
               const display: string = displayHidden(item.is_required, showRequired);
@@ -264,7 +271,7 @@ export const ServiceNode = ({ data }: any) => {
               }
             });
           })()}
-        <div style={{display: "flex", justifyContent: "space-around", alignItems: "center"}}>
+        <div style={{display: "flex", justifyContent: "space-around", alignItems: "center", marginTop: "15px"}}>
         <button
             style={{ marginTop: "10px" }}
             className="button is-success is-light is-small"
